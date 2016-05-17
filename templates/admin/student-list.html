@@ -1,0 +1,186 @@
+<div class="wrapper">
+    <div class="container">
+        <div class="section">
+<div class="border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>
+                <a href="../account">Home</a>
+            </li>
+            <li class="active">
+                <strong>Register Student</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="col-lg-12 animated fadeInDown wrapper wrapper-content">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Students Personal Data Sheet</h5>
+        </div>
+        <div class="ibox-content">
+            <form class="form-horizontal" id="form_registerStudent" role='form' action='' method='post' enctype='multipart/form-data'>
+                <div>
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <label>1. A.  Family Name: </label>
+                            <input data-inputtype='required' type="text" placeholder="Family Name" name="field_fname" class="form-control">
+                        </div>
+
+                        <div class="col-lg-4">
+                            <label>B.  Given Name: </label>
+                            <input data-inputtype='required' type="text" placeholder="Given Name" name="field_gname" class="form-control">
+                        </div>
+
+                        <div class="col-lg-4">
+                            <label>C.  Middle Name: </label>
+                            <input data-inputtype='required' type="text" placeholder="Middle Name" name="field_mname" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="col-lg-8">
+                            <label>2. Date of Birth: </label>
+                            <div id="year_Birth">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input data-inputtype='required' type="text" placeholder="Date of Birth" name="field_dob" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>3. Age: </label>
+                            <input data-inputtype='required' type="text" placeholder="Age" name="field_age" data-mask="99" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>4. Place of Birth: </label>
+                            <input data-inputtype='required' type="text" placeholder="Place of Birth" name="field_pob" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>5. Permanent Address: </label>
+                            <input data-inputtype='required' type="text" placeholder="Permanent Address" name="field_permanentAddress" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label>6. Gender: </label>
+                                <select class="form-control m-b" name="field_gender">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <label>7. Citizenship: </label>
+                            <input data-inputtype='required' type="text" placeholder="Citizenship" name="field_citizenship" class="form-control">
+                        </div>
+
+                        <div class="col-lg-3">
+                            <label>8. Height: </label>
+                            <input data-inputtype='required' type="text" placeholder="Height" name="field_height" data-mask='9?" 99' class="form-control">
+                        </div>
+                        
+                        <div class="col-lg-3">
+                            <label>Weight: </label>
+                            <div class="input-group m-b">
+                                <input data-inputtype='required' type="text" placeholder="Weight" name="field_weight" data-mask="9?9" class="form-control">
+                                <span class="input-group-addon">kgs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="col-lg-6">
+                            <label>9. Family Background</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-6">
+                            <label>Father's Name: </label>
+                            <input data-inputtype='required' type="text" placeholder="Father's Name" name="field_fatherName" class="form-control">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label>Mother's Name: </label>
+                            <input data-inputtype='required' type="text" placeholder="Mother's Name" name="field_motherName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label>Number of Brothers: </label>
+                            <input data-inputtype='required' type="text" placeholder="Number of Brothers" name="field_nob" value="0" class="form-control">
+                        </div>
+                        
+                        <div class="col-lg-3">
+                            <label>Number of Sisters: </label>
+                            <input data-inputtype='required' type="text" placeholder="Number of Sisters" name="field_nos" value="0" class="form-control">
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Total: </label>
+                            <input type="text" placeholder="" disabled name="field_total" value="0" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="col-lg-6">
+                            <label>10. Elementary School Graduated: </label>
+                            <input data-inputtype='required' type="text" placeholder="Elementary School Graduated" name="field_elemGraduated" class="form-control">
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Year Graduated: </label>
+                            <div id="year_Graduated">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input data-inputtype='required' type="text" placeholder="Year Graduated" name="field_yearGraduated" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>General Average: </label>
+                            <input data-inputtype='required' type="text" placeholder="General Average" name="field_genave" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <div class="checkbox checkbox-inline"> 
+                                <input type="checkbox" name="field_autosid" id="field_autosid" checked>
+                                <label for="field_autosid"> Auto-create Student ID</label>
+                            </div>
+                            <br/>                
+                            <div class="hidden" id='div_studentID'>
+                                <label></label>
+                                <input data-inputtype='optional' type="text" placeholder="Student ID" name="field_studentID" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <a class="btn btn-outline btn-success pull-right" id='btn_registerStudent'>Register</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>   
+
+        </div>
+    </div>
+</div>
