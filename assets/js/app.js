@@ -16,10 +16,8 @@ var App = function () {
             });
         },
         handleLoadPage: function(hash) {
-            // var node = account.accountLevel();
             var node = 'admin';
             var newhash = hash.split(';');
-            Pace.restart();
             var targetUrl = newhash[0].replace('#cmd=','../templates/'+node+'/')+".html";
             $('.jvectormap-label, .jvector-label, .AutoFill_border ,#gritter-notice-wrapper, .ui-autocomplete, .colorpicker, .FixedHeader_Header, .FixedHeader_Cloned .lightboxOverlay, .lightbox').remove();
             $.ajax({
@@ -28,13 +26,13 @@ var App = function () {
                 dataType: 'html',
                 cache: false,
                 success: function(data) {
-                    console.log(data);
+                    console.log(targetUrl);
                     $('#content').html(data);
                     if(newhash.length>1){
                         targetUrl = newhash[1].replace('content=','../templates/'+node+'/')+".html";
                     }
                     else{
-                        newhash.push('content=student-list');
+                        newhash.push('content=schoolInfo');
                         targetUrl = newhash[1].replace('content=','../templates/'+node+'/')+".html";
                     }
                     $.ajax({
@@ -44,6 +42,7 @@ var App = function () {
                         cache: false,
                         success: function(data) {
                             $('#ajax-subcontent').html(data);
+                            $("a").parent('li').removeClass("active");
                             $("a[href='"+hash+"']").parent('li').addClass("active");
                         }
                     });
@@ -67,14 +66,11 @@ var App = function () {
         },
         init: function () {
             this.initAjaxFunction();
-
             $("#page-top").removeClass('boxed-layout');
         },
         initAjaxFunction: function() {
             this.handleCheckPageLoadUrl(window.location.hash);
             this.handleHashChange();
-
-            // ajax cache setup
             $.ajaxSetup({
                 cache: false
             });

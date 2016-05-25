@@ -116,6 +116,15 @@ class DatabaseClasses extends DataClasses{
 		return $Array;
 	}
 
+	function PDO_ASSOC($SQLString){
+		$Array = array();
+		$Query = DatabaseClasses::PDO_Query($SQLString);
+		foreach ($Query->fetchAll(PDO::FETCH_ASSOC) as $key) {
+			$Array[] = $key;
+		}
+		return $Array;
+	}
+
 	function PDO_RowCount($Table,$Column,$Condition){
 		$Query = DatabaseClasses::PDO_Query("SELECT * FROM $Table WHERE $Column = '$Condition'");
 		return $Query->rowCount();

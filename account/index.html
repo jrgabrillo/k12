@@ -8,19 +8,19 @@
     <title>K12</title>
 
     <link rel="icon" href="" sizes="32x32">
-    <link rel="apple-touch-icon-precomposed" href="http://demo.geekslabs.com/materialize/v3.1/images/favicon/apple-touch-icon-152x152.png">
-    <meta name="msapplication-TileColor" content="#00bcd4">
-    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">  
-    <link media="screen" href="../assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link media="screen" href="../assets/css/style.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link media="screen" href="../assets/css/custom.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link media="screen" href="../assets/css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link media="screen" href="../assets/css/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link media="screen" href="../assets/css/materialize.min.css" type="text/css" rel="stylesheet">
+    <link media="screen" href="../assets/css/style.min.css" type="text/css" rel="stylesheet" >
+    <link media="screen" href="../assets/css/custom.min.css" type="text/css" rel="stylesheet" >
+    <link media="screen" href="../assets/css/prism.css" type="text/css" rel="stylesheet" >
+    <link media="screen" href="../assets/css/perfect-scrollbar.css" type="text/css" rel="stylesheet" >
     <link media="screen" href="../assets/css/icons.css" type="text/css" rel="stylesheet">
-    <link href="../assets/css/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link media="screen" href="../assets/css/plugins/cropper/cropper.min.css" type="text/css" rel="stylesheet">
+    <link media="screen" href="../assets/css/plugins/dataTables/dataTables.tableTools.min.css" type="text/css" rel="stylesheet">
+    <link media="screen" href="../assets/css/plugins/dataTables/dataTables.responsive.css" type="text/css" rel="stylesheet">
+    <link media="screen" href="../assets/css/plugins/dataTables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
   </head>
 
-<body class=''>
+<body>
     <div class="progress hide-on-med-and-up hide-on-med-and-down" style="margin: 0rem 0 1rem 0;">
         <div class="indeterminate"></div>
     </div>
@@ -48,9 +48,9 @@
         </div>
     </header>
 
-    <div id="main" class='hidden'>
+    <div id="main">
         <div class="wrapper">
-            <aside id="left-sidebar-nav">
+            <aside id="left-sidebar-nav text-red">
                 <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y" style="width: 240px;">
                     <li class="user-details red darken-3" id='user-account'>
                         <div class="row">
@@ -70,17 +70,27 @@
                     </li>
                     <li class="no-padding">
                         <ul class="collapsible collapsible-accordion">
-                            <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> Students</a>
+                            <li class="bold">
+                                <a href='#cmd=index;content=schoolInfo' class="waves-effect waves-blue black-text"><i class="mdi-action-dashboard"></i> Dashboard</a>
+                            </li>
+                            <li class="bold">
+                                <a class="collapsible-header waves-effect waves-blue black-text"><i class="mdi-action-account-circle"></i> Students</a>
                                 <div class="collapsible-body" style="">
                                     <ul>
-                                        <li><a href='#cmd=index;content=student-register'>Add</a></li>
-                                        <li><a href='#cmd=index;content=student-register'>List</a></li>
+                                        <li><a href="#cmd=index;content=student-list">List</a></li>
+                                        <li><a href="#cmd=index;content=student-register">Add</a></li>
                                     </ul>
                                 </div>
                             </li>
-                            <li class="bold"><a href='#cmd=index;content=student-register' class="waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> Section</a></li>
-                            <li class="bold"><a href='#cmd=index;content=student-register' class="waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> Grade Sheet</a></li>
-                            <li class="bold"><a href='#cmd=index;content=student-register' class="waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> Summary Grades</a></li>
+                            <li class="bold">
+                                <a href='#cmd=index;content=section-list' class="waves-effect waves-blue black-text"><i class="mdi-action-view-list"></i> Section</a>
+                            </li>
+                            <li class="bold">
+                                <a href='#cmd=index;content=grade-sheet' class="waves-effect waves-black black-text"><i class="mdi-image-grid-on"></i> Grade Sheet</a>
+                            </li>
+                            <li class="bold">
+                                <a href='#cmd=index;content=grade-summary' class="waves-effect waves-black black-text"><i class="mdi-notification-event-note"></i> Summary Grades</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -99,19 +109,22 @@
             </div>
         </div>
     </footer>
-    <script type="text/javascript" src="../assets/js/jquery-2.1.1.js"></script>    
+    <script type="text/javascript" src="../assets/js/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
     <script type="text/javascript" src="../assets/js/prism.js"></script>
     <script type="text/javascript" src="../assets/js/perfect-scrollbar.min.js"></script>
-    <script type="text/javascript" src="../assets/js/masonry.pkgd.min.js"></script>
-    <script type="text/javascript" src="../assets/js/imagesloaded.pkgd.min.js"></script>    
     <script type="text/javascript" src="../assets/js/plugins.min.js"></script>
-    <script type="text/javascript" src="../assets/js/custom-script.js"></script>
-    <script type="text/javascript" src="../assets/js/plugins/toastr/toastr.min.js"></script>
-    <script type="text/javascript" src="../assets/js/plugins/pace/pace.min.js"></script>
-    <script type="text/javascript" src="../assets/js/plugins/jquery-hashchange/jquery.hashchange.min.js"></script>
+    <script type="text/javascript" src="../assets/js/defiant.min.js"></script>
     <script type="text/javascript" src="../assets/js/app.js"></script>
     <script type="text/javascript" src="../assets/js/process.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/jquery-hashchange/jquery.hashchange.min.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/cropper/cropper.min.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/validation/additional-methods.min.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.responsive.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script type="text/javascript">
         account.ini();
         App.init();

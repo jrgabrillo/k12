@@ -1,0 +1,134 @@
+<div class="wrapper">
+    <div class="container">
+        <div class="section">
+			<div class="row" id='display_schoolDetails'>
+		        <div class="col s8 offset-s2">
+		            <div id="profile-card" class='show-data card'>
+		                <div class="card-image waves-effect waves-block waves-light">
+		                    <img class="activator" src="../assets/img/bg-banner.jpg" alt="user bg" id='_schoolBanner'>
+		                </div>
+		                <div class="card-content">
+		                    <img src="../assets/img/logo.png" alt="" class="circle responsive-img activator card-profile-image" id='_schoolLogo'>
+		                    <span class="card-title activator grey-text text-darken-4" id='_schoolName'>Name Of the School</span>
+		                    <div class="divider"></div>
+		                    <p>School Address: <span id='_schoolAddress'></span></p>
+		                    <div class="divider"></div>
+		                    <p>School ID: <span id='_schoolSchoolID'></span></p>
+		                    <div class="divider"></div>
+		                    <p>School Year: <span id='_schoolSchoolYear'></span></p>
+		                    <div class="divider"></div>
+		                    <p>Region: <span id='_schoolRegion'></span></p>
+		                    <div class="divider"></div>
+		                    <p>Division: <span id='_schoolDivision'></span></p>
+		                </div>
+                        <div class="card-reveal" style="display: none; transform: translateY(0px);">
+                            <span class="card-title grey-text text-darken-4">Updating school information<i class="mdi-navigation-close right"></i></span>
+
+							<form class="formValidate col s12" id="form_updateSchoolInfo" method="get" action="" novalidate="novalidate">
+								<div class="row">
+									<div class="input-field col s12">
+										<label for="field_schoolName" class="active">Name of school: </label>
+					                    <input type="text" id='field_schoolName' name="field_schoolName" data-error=".error_schoolName">
+										<div class="error_schoolName"></div>	
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<label for="field_schoolAddress" class="active">Address of school: </label>
+					                    <input type="text" id='field_schoolAddress' name="field_schoolAddress" data-error=".error_schoolAddress">
+										<div class="error_schoolAddress"></div>	
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s3">
+					                    <input type="text" id='field_schoolYear' name="field_schoolYear" data-error=".error_schoolYear">
+										<label for="field_schoolYear" class="active">School year: </label>
+										<div class="error_schoolYear"></div>	
+									</div>
+									<div class="input-field col s3">
+					                    <input id='field_schoolID' type="text" name="field_schoolID" data-error=".error_schoolID">
+										<label for="field_schoolID" class="active">School ID: </label>
+										<div class="error_schoolID"></div>	
+									</div>
+									<div class="input-field col s3">
+					                    <input id='field_region' type="text" name="field_region" data-error=".error_region">
+										<label for="field_region" class="active">Region: </label>
+										<div class="error_region"></div>	
+									</div>
+									<div class="input-field col s3">
+					                    <input id='field_division' type="text" name="field_division" data-error=".error_division">
+										<label for="field_division" class="active">Division: </label>
+										<div class="error_division"></div>	
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<button class="btn blue waves-effect waves-light right" name='update' data-cmd='update_schoolInfo'>Update</button>
+									</div>
+								</div>
+							</form>
+                        </div>
+		            </div>
+		        </div>
+			</div>
+			<div class="row hidden" id='field_schoolDetails'>
+		        <div class="col s8 offset-s2">
+					<div class="card-panel">
+						<h4 class="header2">School Information</h4>
+						<div class="row">
+							<form class="formValidate col s12" id="form_schoolInfo" method="get" action="" novalidate="novalidate">
+								<div class="row">
+									<div class="input-field col s12">
+										<label for="field_schoolName" class="">Name of school: </label>
+					                    <input type="text" id='field_schoolName' name="field_schoolName" data-error=".error_schoolName">
+										<div class="error_schoolName"></div>	
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<label for="field_schoolAddress" class="">Address of school: </label>
+					                    <input type="text" id='field_schoolAddress' name="field_schoolAddress" data-error=".error_schoolAddress">
+										<div class="error_schoolAddress"></div>	
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s3">
+					                    <input type="text" id='field_schoolYear' name="field_schoolYear" data-error=".error_schoolYear">
+										<label for="field_schoolYear" class="">School year: </label>
+										<div class="error_schoolYear"></div>	
+									</div>
+									<div class="input-field col s3">
+					                    <input id='field_schoolID' type="text" name="field_schoolID" data-error=".error_schoolID">
+										<label for="field_schoolID" class="">School ID: </label>
+										<div class="error_schoolID"></div>	
+									</div>
+									<div class="input-field col s3">
+					                    <input id='field_region' type="text" name="field_region" data-error=".error_region">
+										<label for="field_region" class="">Region: </label>
+										<div class="error_region"></div>	
+									</div>
+									<div class="input-field col s3">
+					                    <input id='field_division' type="text" name="field_division" data-error=".error_division">
+										<label for="field_division" class="">Division: </label>
+										<div class="error_division"></div>	
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s12">
+										<button class="btn blue waves-effect waves-light right" name='save' data-cmd='save_schoolInfo'>Save</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+		        </div>
+			</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	account.update_schoolInfo();
+    $(document).ready(function(){
+        $('.tooltipped').tooltip();
+    });   
+</script>
