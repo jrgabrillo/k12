@@ -116,7 +116,7 @@ var system = function () {
 			return report;
 		},
 		send_mail:function(email,message){
-			var ajax = this.do_ajax('http://apparato.net/systems/harmony/Process.php?send-mail',[email,message]);
+			var ajax = this.do_ajax('../assets/harmony/Process.php?send-mail',[email,message]);
 			ajax.success(function(data){
 			});
 		},
@@ -350,12 +350,12 @@ var ini = function () {
 	"use strict";
 	return {
 		installDatabase:function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-yearlevel',"");
+			var data = system.get_ajax('assets/harmony/Process.php?get-yearlevel',"");
 			data.success(function(data){
 			});
 		},
 		checkConnection:function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?chkConnection',"");
+			var data = system.get_ajax('assets/harmony/Process.php?chkConnection',"");
 			data.success(function(data){
 				if(data != 1){ 
 					// not connected
@@ -384,12 +384,12 @@ var _process = function () {
 			$("a[data-cmd='dbConnect']").click(function(){
 				system.loader(true);
 				Materialize.toast('Creating database. Do not interupt.',2000,'',function(){
-					var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?createDB',"");
+					var data = system.get_ajax('assets/harmony/Process.php?createDB',"");
 					data.success(function(data){
 						if(data == 1){
 							Materialize.toast('Database created.',5000,'',function(){
 								Materialize.toast('Adding tables.',5000,'',function(){
-									var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?createTables',"");
+									var data = system.get_ajax('assets/harmony/Process.php?createTables',"");
 									data.success(function(data){
 										console.log(data);
 										if(data != 0){
@@ -415,7 +415,7 @@ var _process = function () {
 			})
 		},
 		checkSchoolDetails:function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?checkSchoolDetails',"");
+			var data = system.get_ajax('assets/harmony/Process.php?checkSchoolDetails',"");
 			data.success(function(data){
 				data = JSON.parse(data);
 				console.log(data);
@@ -432,7 +432,7 @@ var _process = function () {
 		logIn:function(){
 			$("a[data-cmd='login']").click(function(){
 				var data = $(".login-form").serializeArray();
-				var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?login',data);
+				var data = system.get_ajax('assets/harmony/Process.php?login',data);
 				data.success(function(data){
 					if(data != 0){
 						$("#display_loginFailed .card.green").removeClass("hide-on-med-and-up hide-on-med-and-down");
@@ -457,7 +457,7 @@ var account = function () {
 	"use strict";
 	return {
 		ini:function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-account',"");
+			var data = system.get_ajax('../assets/harmony/Process.php?get-account',"");
 			data.success(function(data){
 				data = JSON.parse(data);
 				$("#user-account img").prop('src',"../assets/img/"+data[0][4]);
@@ -465,7 +465,7 @@ var account = function () {
 			});
 		},  
 		accountLevel: function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-account',"");
+			var data = system.get_ajax('../assets/harmony/Process.php?get-account',"");
 			data.success(function(data){
 				data = JSON.parse(data);
 				console.log(data[0][2]);
@@ -481,7 +481,7 @@ var account = function () {
 				formatSubmit: 'yyyy/mm/dd',
 			});
 
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-assoc-yearLevel',"");
+			var data = system.get_ajax('../assets/harmony/Process.php?get-assoc-yearLevel',"");
 			data.success(function(data){
 				var data = JSON.parse(data);
 				var options = "<option disabled='' selected>Choose year level</option>";
@@ -542,7 +542,7 @@ var account = function () {
 	            },
 				submitHandler: function (form) {
 					var studentInfo = $(form).serializeArray();
-					var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?set-studentInfo',studentInfo);
+					var data = system.get_ajax('../assets/harmony/Process.php?set-studentInfo',studentInfo);
 					data.success(function(data){
 						if(data == 1){
 							Materialize.toast('Save.',4000);
@@ -557,7 +557,7 @@ var account = function () {
 			}); 
 		},
 		display_studentList:function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-students',"");
+			var data = system.get_ajax('../assets/harmony/Process.php?get-students',"");
 			data.success(function(data){
 		        localStorage.setItem('k12_studentList',data);
 				var data = JSON.parse(data);
@@ -646,7 +646,7 @@ var account = function () {
 			$('.tooltipped').tooltip({delay: 50});
 		},
 		add_yearLevel:function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?set-yearLevel',"");
+			var data = system.get_ajax('../assets/harmony/Process.php?set-yearLevel',"");
 			data.success(function(data){
 				if(data == 1){
 					Materialize.toast('Save.',4000);
@@ -659,7 +659,7 @@ var account = function () {
 			});
 		},
 		update_schoolInfo:function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-schoolInfo',"");
+			var data = system.get_ajax('../assets/harmony/Process.php?get-schoolInfo',"");
             var months = ["January", "February", "March", "April", "May", "June",  "July", "August", "September", "October", "November", "December"];
 			data.success(function(data){
 				data = JSON.parse(data);
@@ -734,7 +734,7 @@ var account = function () {
 				},
 				submitHandler: function (form) {
 					var form = $(form).serializeArray();
-					var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?set-schoolInfo',form);
+					var data = system.get_ajax('../assets/harmony/Process.php?set-schoolInfo',form);
 					data.success(function(data){
 						console.log(data);
 						if(data == 1){
@@ -771,7 +771,7 @@ var account = function () {
 				},
 				submitHandler: function (form) {
 					var form = $(form).serializeArray();
-					var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?set-schoolInfo',form);
+					var data = system.get_ajax('../assets/harmony/Process.php?set-schoolInfo',form);
 					data.success(function(data){
 						console.log(data);
 						if(data == 1){
@@ -827,7 +827,7 @@ var account = function () {
 					},
 					submitHandler: function (form) {
 						var sectionInfo = $(form).serializeArray();
-						var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?set-section',sectionInfo);
+						var data = system.get_ajax('../assets/harmony/Process.php?set-section',sectionInfo);
 						data.success(function(data){
 							console.log(data);
 							if(data == 1){
@@ -846,7 +846,7 @@ var account = function () {
 
 			$("a[data-cmd='delete-section']").click(function(){
 				var data = $(this).data();
-				var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?delete-section',[data.node]);
+				var data = system.get_ajax('../assets/harmony/Process.php?delete-section',[data.node]);
 				data.success(function(data){
 					if(data == 1){
 						Materialize.toast('Deleted.',4000);
@@ -962,7 +962,7 @@ var account = function () {
 					submitHandler: function (form) {
 						var form = $(form).serializeArray();
 						console.log(form);
-						var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?set-subject',form);
+						var data = system.get_ajax('../assets/harmony/Process.php?set-subject',form);
 						data.success(function(data){							
 							if(data == 1){
 								Materialize.toast('Save.',4000);
@@ -1040,7 +1040,7 @@ var account = function () {
 					},
 					submitHandler: function (form) {
 						var subjectInfo = $(form).serializeArray();
-						var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?set-sublevelsubject',subjectInfo);
+						var data = system.get_ajax('../assets/harmony/Process.php?set-sublevelsubject',subjectInfo);
 						data.success(function(data){
 							console.log(data);
 							if(data == 1){
@@ -1069,7 +1069,7 @@ var account = function () {
 
 
 				$("a[data-cmd='confirm-delete']").click(function(){
-					var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?delete-subject',[_data.key,_data.node]);
+					var data = system.get_ajax('../assets/harmony/Process.php?delete-subject',[_data.key,_data.node]);
 					data.success(function(data){
 						if(data == 1){
 							system.close_modal();
@@ -1098,7 +1098,7 @@ var account = function () {
 				system.open_modal("<div class='row'><div class='col offset-s3 s6'>Are you sure you want to delete this sub-level subject?</div></div>",content);
 
 				$("a[data-cmd='confirm-delete']").click(function(){
-					var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?delete-sublevelsubject',[_data.key,_data.node]);
+					var data = system.get_ajax('../assets/harmony/Process.php?delete-sublevelsubject',[_data.key,_data.node]);
 					data.success(function(data){
 						if(data == 1){
 							system.close_modal();
@@ -1117,7 +1117,7 @@ var account = function () {
 			});
 		},
 		yearLevel:function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-yearLevel',"");
+			var data = system.get_ajax('../assets/harmony/Process.php?get-yearLevel',"");
 			data.success(function(data){
 				var data = JSON.parse(data);
 				if(data.length>0){
@@ -1212,7 +1212,7 @@ var account = function () {
 			});
 		},
 		controls_gradingSheet:function(){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-assoc-yearLevel',"");
+			var data = system.get_ajax('../assets/harmony/Process.php?get-assoc-yearLevel',"");
 			data.success(function(data){
 				var data = JSON.parse(data);
 				var options = "<option disabled='' selected>Choose year level</option>";
@@ -1392,7 +1392,7 @@ var account = function () {
 						}
 						else{
 							var form = [quarter,year,section,subject,subsubject,$(form).serializeArray()];
-							var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?set-grade',form);
+							var data = system.get_ajax('../assets/harmony/Process.php?set-grade',form);
 							data.success(function(data){							
 								if(data == 1){
 									account.get_grade(JSON.stringify(controls));
@@ -1415,21 +1415,21 @@ var account = function () {
 			});
 		},
 		get_grade:function(controls){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-grade',controls);
+			var data = system.get_ajax('../assets/harmony/Process.php?get-grade',controls);
 			data.success(function(data){		
 				// console.log(data);				
 				localStorage.setItem("grades_gradeSheetQuarter",data);
 			});
 		},
 		get_gradeSummary:function(controls){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-gradeSummary',controls);
+			var data = system.get_ajax('../assets/harmony/Process.php?get-gradeSummary',controls);
 			data.success(function(data){		
 				console.log(data);				
 				// localStorage.setItem("grades_gradeSheetQuarter",data);
 			});
 		},
 		get_student:function(controls){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-studentsGradeSheet',controls);
+			var data = system.get_ajax('../assets/harmony/Process.php?get-studentsGradeSheet',controls);
 			data.success(function(data){
 				// console.log(data);
 				data = JSON.parse(data);
@@ -1437,7 +1437,7 @@ var account = function () {
 			});
 		},
 		get_subjectDetails:function(controls){
-			var data = system.get_ajax('http://apparato.net/systems/harmony/Process.php?get-subjectDetails',controls);
+			var data = system.get_ajax('../assets/harmony/Process.php?get-subjectDetails',controls);
 			data.success(function(data){
 				data = JSON.parse(data);
 		        localStorage.setItem('subject_gradingSheet',JSON.stringify(data));
