@@ -26,7 +26,6 @@ var App = function () {
                 dataType: 'html',
                 cache: false,
                 success: function(data) {
-                    console.log(targetUrl);
                     $('#content').html(data);
                     if(newhash.length>1){
                         targetUrl = newhash[1].replace('content=','../templates/'+node+'/')+".html";

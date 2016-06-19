@@ -56,22 +56,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="section" id="display_connectionError">
-                    <div class="row">
-                        <div class="col m3 l3 card animated wobble"></div>
-                        <div class="col s12 m6 l6 animated wobble">
-                            <div class="card">
-                                <div class="card-content">
-                                    <span class="card-title">Connection Error!</span>
-                                    <p>The system is not connected to the database.</p>
-                                </div>
-                                <div class="card-action">
-                                    <a href="#" class="grey-text" data-cmd='dbConnect'>Connect</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="section hide-on-med-and-up hide-on-med-and-down" id="display_login">
                     <div class="row">
                         <div class="col m4 l4 card animated wobble"></div>
@@ -125,18 +109,37 @@
                         </div>
                     </div>
                 </div>
+                <div class="section" id="display_connectionError">
+                    <div class="row">
+                        <div class="col m3 l3 card animated wobble"></div>
+                        <div class="col s12 m6 l6 animated wobble">
+                            <div class="card">
+                                <div class="card-content">
+                                    <span class="card-title">Connection Error!</span>
+                                    <p>The system is not connected to the database.</p>
+                                </div>
+                                <div class="card-action">
+                                    <a href="#" class="grey-text" data-cmd='dbConnect'>Connect</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="fixed-action-btn" style="bottom: 50px; right: 19px;">
                     <a class="btn-floating btn-large blue" data-position="left" data-tooltip="Options">
                         <i class="mdi-navigation-more-vert"></i>
                     </a>
                     <ul>
-                        <li><a href="" class="btn-floating blue darken-1 tooltipped mdi-communication-vpn-key" data-position="left" data-tooltip="Log In"></a></li>
+                        <li><a class="btn-floating blue darken-1 tooltipped mdi-communication-vpn-key" data-position="left" data-tooltip="Log In"></a></li>
                         <li><a href="" class="btn-floating blue darken-1 tooltipped mdi-content-content-copy" data-position="left" data-tooltip="Landing Page"><i class="large mdi-device-now-widgets"></i></a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    <div class="hiddendiv common"></div>
+    <div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+    <div class="drag-target" style="right: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
     <script type="text/javascript" src="assets/js/jquery-2.1.1.js"></script>    
     <script type="text/javascript" src="assets/js/materialize.min.js"></script>
     <script type="text/javascript" src="assets/js/prism.js"></script>
@@ -181,9 +184,5 @@
             });                
         }
     </script>
-
-    <div class="hiddendiv common"></div>
-    <div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
-    <div class="drag-target" style="right: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
 </body>
 </html>

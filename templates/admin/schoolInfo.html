@@ -11,15 +11,15 @@
 		                    <img src="../assets/img/logo.png" alt="" class="circle responsive-img activator card-profile-image" id='_schoolLogo'>
 		                    <span class="card-title activator grey-text text-darken-4" id='_schoolName'>Name Of the School</span>
 		                    <div class="divider"></div>
-		                    <p>School Address: <span id='_schoolAddress'></span></p>
+		                    <p><strong>School Address: </strong><span id='_schoolAddress'></span></p>
 		                    <div class="divider"></div>
-		                    <p>School ID: <span id='_schoolSchoolID'></span></p>
+		                    <p><strong>School ID: </strong><span id='_schoolSchoolID'></span></p>
 		                    <div class="divider"></div>
-		                    <p>School Year: <span id='_schoolSchoolYear'></span></p>
+		                    <p><strong>School Year: </strong><span id='_schoolSchoolYear'></span></p>
 		                    <div class="divider"></div>
-		                    <p>Region: <span id='_schoolRegion'></span></p>
+		                    <p><strong>Region: </strong><span id='_schoolRegion'></span></p>
 		                    <div class="divider"></div>
-		                    <p>Division: <span id='_schoolDivision'></span></p>
+		                    <p><strong>Division: </strong><span id='_schoolDivision'></span></p>
 		                </div>
                         <div class="card-reveal" style="display: none; transform: translateY(0px);">
                             <span class="card-title grey-text text-darken-4">Updating school information<i class="mdi-navigation-close right"></i></span>
@@ -40,22 +40,29 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="input-field col s3">
-					                    <input type="text" id='field_schoolYear' name="field_schoolYear" data-error=".error_schoolYear">
-										<label for="field_schoolYear" class="active">School year: </label>
-										<div class="error_schoolYear"></div>	
+									<div class="input-field col s6">
+					                    <input type="text" id='field_schoolStart' name="field_schoolStart" data-error=".error_schoolStart">
+										<label for="field_schoolStart" class="active">School Start: </label>
+										<div class="error_schoolStart"></div>	
 									</div>
-									<div class="input-field col s3">
+									<div class="input-field col s6">
+					                    <input type="text" id='field_schoolEnd' name="field_schoolEnd" data-error=".error_schoolEnd">
+										<label for="field_schoolEnd" class="active">School End: </label>
+										<div class="error_schoolEnd"></div>	
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s4">
 					                    <input id='field_schoolID' type="text" name="field_schoolID" data-error=".error_schoolID">
 										<label for="field_schoolID" class="active">School ID: </label>
 										<div class="error_schoolID"></div>	
 									</div>
-									<div class="input-field col s3">
+									<div class="input-field col s4">
 					                    <input id='field_region' type="text" name="field_region" data-error=".error_region">
 										<label for="field_region" class="active">Region: </label>
 										<div class="error_region"></div>	
 									</div>
-									<div class="input-field col s3">
+									<div class="input-field col s4">
 					                    <input id='field_division' type="text" name="field_division" data-error=".error_division">
 										<label for="field_division" class="active">Division: </label>
 										<div class="error_division"></div>	
@@ -92,11 +99,18 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="input-field col s3">
-					                    <input type="text" id='field_schoolYear' name="field_schoolYear" data-error=".error_schoolYear">
-										<label for="field_schoolYear" class="">School year: </label>
-										<div class="error_schoolYear"></div>	
+									<div class="input-field col s6">
+					                    <input type="text" id='field_schoolStart' name="field_schoolStart" data-error=".error_schoolStart">
+										<label for="field_schoolStart" class="active">School Start: </label>
+										<div class="error_schoolStart"></div>	
 									</div>
+									<div class="input-field col s6">
+					                    <input type="text" id='field_schoolEnd' name="field_schoolEnd" data-error=".error_schoolEnd">
+										<label for="field_schoolEnd" class="active">School End: </label>
+										<div class="error_schoolEnd"></div>	
+									</div>
+								</div>
+								<div class="row">
 									<div class="input-field col s3">
 					                    <input id='field_schoolID' type="text" name="field_schoolID" data-error=".error_schoolID">
 										<label for="field_schoolID" class="">School ID: </label>

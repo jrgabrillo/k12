@@ -14,10 +14,11 @@
     <link media="screen" href="../assets/css/prism.css" type="text/css" rel="stylesheet" >
     <link media="screen" href="../assets/css/perfect-scrollbar.css" type="text/css" rel="stylesheet" >
     <link media="screen" href="../assets/css/icons.css" type="text/css" rel="stylesheet">
-    <link media="screen" href="../assets/css/plugins/cropper/cropper.min.css" type="text/css" rel="stylesheet">
+    <link media="screen" href="../assets/css/plugins/cropper/cropper.min.css" type="text/css" r el="stylesheet">
     <link media="screen" href="../assets/css/plugins/dataTables/dataTables.tableTools.min.css" type="text/css" rel="stylesheet">
     <link media="screen" href="../assets/css/plugins/dataTables/dataTables.responsive.css" type="text/css" rel="stylesheet">
     <link media="screen" href="../assets/css/plugins/dataTables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
+    <link media="screen" href="../assets/css/plugins/datapicker/datepicker3.css" type="text/css" rel="stylesheet">
   </head>
 
 <body>
@@ -29,24 +30,17 @@
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
-    <header id="header" class="page-topbar">
+    <div id="" class="page-topbar">
         <div class="navbar-fixed">
             <nav class="navbar-color red lighten-1">
-                <div class="nav-wrapper">
-                    <ul class="left">                      
-                        <li>
-                            <h1 class="logo-wrapper">
-                                <a href="#" class="brand-logo darken-1">
-                                    <img src="../assets/img/materialize-logo.png" alt="materialize logo">
-                                </a>
-                                <span class="logo-text">Materialize</span>
-                            </h1>
-                        </li>
-                    </ul>
+                <div class="nav-wrapper row">
+                    <div class="col s12">
+                        <a href="#!" class="brand-logo">K12 Grading System</a>
+                    </div>
                 </div>
             </nav>
         </div>
-    </header>
+    </div>
 
     <div id="main">
         <div class="wrapper">
@@ -83,13 +77,13 @@
                                 </div>
                             </li>
                             <li class="bold">
-                                <a href='#cmd=index;content=section-list' class="waves-effect waves-blue black-text"><i class="mdi-action-view-list"></i> Section</a>
-                            </li>
-                            <li class="bold">
-                                <a href='#cmd=index;content=grade-sheet' class="waves-effect waves-black black-text"><i class="mdi-image-grid-on"></i> Grade Sheet</a>
+                                <a href='#cmd=index;content=options_gradeSheet' class="waves-effect waves-black black-text"><i class="mdi-image-grid-on"></i> Grade Sheet</a>
                             </li>
                             <li class="bold">
                                 <a href='#cmd=index;content=grade-summary' class="waves-effect waves-black black-text"><i class="mdi-notification-event-note"></i> Summary Grades</a>
+                            </li>
+                            <li class="bold">
+                                <a href="#cmd=index;content=section-list" class="waves-effect waves-blue black-text"><i class="mdi-action-view-list"></i> Section manager</a>
                             </li>
                         </ul>
                     </li>
@@ -116,7 +110,8 @@
     <script type="text/javascript" src="../assets/js/plugins.min.js"></script>
     <script type="text/javascript" src="../assets/js/defiant.min.js"></script>
     <script type="text/javascript" src="../assets/js/app.js"></script>
-    <script type="text/javascript" src="../assets/js/process.js"></script>
+    <!-- <script type="text/javascript" src="../assets/js/process.js"></script> -->
+    <script type="text/javascript" src="http://psujobs.apparato.net/process.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/jquery-hashchange/jquery.hashchange.min.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/cropper/cropper.min.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/validation/jquery.validate.min.js"></script>
@@ -125,6 +120,7 @@
     <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.responsive.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
         account.ini();
         App.init();
