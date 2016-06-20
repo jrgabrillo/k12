@@ -24,6 +24,7 @@ var App = function () {
                 type: 'POST',
                 url: targetUrl,
                 dataType: 'html',
+                crossDomain: true,
                 cache: false,
                 success: function(data) {
                     console.log(targetUrl);
@@ -39,6 +40,7 @@ var App = function () {
                         type: 'POST',
                         url: targetUrl,
                         dataType: 'html',
+                        crossDomain: true,
                         cache: false,
                         success: function(data) {
                             $('#ajax-subcontent').html(data);
@@ -72,7 +74,8 @@ var App = function () {
             this.handleCheckPageLoadUrl(window.location.hash);
             this.handleHashChange();
             $.ajaxSetup({
-                cache: false
+                cache: false,
+                crossDomain: true
             });
         },
     };
