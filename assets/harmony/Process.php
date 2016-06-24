@@ -154,7 +154,7 @@ $function = new DatabaseClasses;
 		$details = json_encode([$year,$section,[$subject,$sub_subject]]);
 		$components = ['Written Works','Performance Task','Quarterly Assessment'];
 		$quarters = ['First Quarter','Second Quarter','Third Quarter','Fourth Quarter'];
-		$shlYear = $function->PDO(true,"SELECT schoolYearStart,sch oolYearEnd FROM tbl_schoolinfo");
+		$shlYear = $function->PDO(true,"SELECT schoolYearStart,schoolYearEnd FROM tbl_schoolinfo");
 		$dateStart = date("Y-m-d",strtotime("01-".$shlYear[0][0]));
 		$dateEnd = date("Y-m-d",strtotime("01-".$shlYear[0][1]));
 

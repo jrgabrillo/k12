@@ -49,7 +49,9 @@
 		$('.tooltipped').tooltip({delay: 50});
 	});
 
-	account.display_studentInfo();
+	info = window.location.href.split(';');
+    info = info[2].split('=');
+	account.display_studentInfo(info[1]);
 	$('.wrapper').click(function(){
 		$(".material-tooltip").hide(100);
 	});

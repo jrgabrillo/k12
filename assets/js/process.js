@@ -1,4 +1,3 @@
-
 var system = function () {
 	"use strict";
 	return {
@@ -606,17 +605,16 @@ var account = function () {
 				$('.tooltipped').tooltip({delay: 50});
 			});
 		},
-		display_studentInfo:function(){
+		display_studentInfo:function(studentID){
             var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
             var months = ["January", "February", "March", "April", "May", "June",  "July", "August", "September", "October", "November", "December"];
-	        var data = localStorage.getItem('k12_studentList'),info = window.location.href.split(';');
+	        var data = localStorage.getItem('k12_studentList');
 			var data = JSON.parse(data);
 			var now = new Date();
-	        info = info[2].split('=');
 			var snapshot = Defiant.getSnapshot(data);
 
-			var result = JSON.search(data,'//info[student_id="'+info[1]+'"]');
-			var result2 = JSON.search(data,'//educ[student_id="'+info[1]+'"]');
+			var result = JSON.search(data,'//info[student_id="'+studentID+'"]');
+			var result2 = JSON.search(data,'//educ[student_id="'+studentID+'"]');
 
 			console.log(result2);
 
@@ -1421,13 +1419,6 @@ var account = function () {
 				localStorage.setItem("grades_gradeSheetQuarter",data);
 			});
 		},
-		get_gradeSummary:function(controls){
-			var data = system.get_ajax('../assets/harmony/Process.php?get-gradeSummary',controls);
-			data.success(function(data){		
-				console.log(data);				
-				// localStorage.setItem("grades_gradeSheetQuarter",data);
-			});
-		},
 		get_student:function(controls){
 			var data = system.get_ajax('../assets/harmony/Process.php?get-studentsGradeSheet',controls);
 			data.success(function(data){
@@ -1621,6 +1612,14 @@ var account = function () {
             $("table.female_finalGrade").parents(".dataTables_wrapper").find('div.s6:nth-child(1)').html("<h5><br/>Female Students</h5>");
 			this.add_grade(data_students,data_controls);
 		},
+		
+		get_gradeSummary:function(controls){
+			var data = system.get_ajax('../assets/harmony/Process.php?get-gradeSummary',controls);
+			data.success(function(data){		
+				// console.log(data);				
+				localStorage.setItem("grades_gradeSheetQuarter",data);
+			});
+		},
 		list_summaryGrade:function(){
 			this.controls_gradingSheet();
 		    $("#form_gradesheet").validate({
@@ -1649,6 +1648,53 @@ var account = function () {
 		get_gradingSheet:function(){
 			// create a function that can return the final grade per subject.
 		},
+		get_handlerSearchStudent:function(){
+			$("#field_search").keyup(function(){
+				var data = $(this).val();
+				$("#disply_studentInfo").html("");
+				if(data != ""){
+					var searchVal = data;
+					var data = JSON.parse(localStorage.getItem("k12_studentList"));
+					var result = JSON.search(data,'//info[contains(family_name,"'+searchVal+'")]',false);
+					var content = "";
+
+					if(result.length>0){
+						content += "<li class='disabled'><div class='col s2' style='padding:6.5px 16px'>Picture</div><span class='col s6' style='padding:6.5px 16px'>Name</span><span class='col s3' style='padding:6.5px 16px'>Student ID</span></li>";
+						$.each(result,function(inx,val){
+							content += "<li data-key='"+val['student_id']+"' data-familyname='"+val['family_name']+"'>"+
+										"	<div class='col s2'><img src='../assets/img/"+val['picture']+"' alt='' class='circle left'></div>"+
+										"	<span class='col s6' style='padding:6.5px 16px'>"+val['family_name'].replace(searchVal, "<u>"+searchVal+"</u>")+" "+val['given_name']+", "+val['middle_name']+"</span> "+
+										"	<span class='col s3' style='padding:6.5px 16px'>"+val['student_id']+"</span> "+
+										"</li>";
+						});
+					}
+					else{
+						content += "<li>"+
+									"	<span class='col s12' style='padding:6.5px 16px'>No result for student family name: <i>"+searchVal+"</i></span> "+
+									"</li>";
+					}
+
+					$("#select-students").html(content);
+					$('.dropdown-content').css({'display':'block'});
+
+					$("#select-students li").click(function(){
+						var data = $(this).data();
+						$("#field_search").val(data['familyname']);
+						account.show_student(data);
+					});						
+				}
+				else{
+					$('.dropdown-content').css({'display':'none'});					
+				}
+			});
+
+			$("body").click(function(){
+				$('.dropdown-content').css({'display':'none'});					
+			});
+		},
+		show_studentGrade:function(data){
+			account.display_studentInfo(data['key']);
+		}	
     };
 }();
 
