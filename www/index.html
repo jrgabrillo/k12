@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>K12 Grading System</title>
+        <link rel="stylesheet" href="lib/framework7/css/framework7.material.min.css">
+        <link rel="stylesheet" href="lib/framework7/css/framework7.material.colors.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/welcomescreen.css">
+        <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="css/plugins/dataTables/dataTables.material.min.css">
+    </head>
+    
+    <body class='theme-orange'>
+        <div class="views">
+            <div class="view view-main">
+                <div class="pages">
+                    <div data-page="index" class="page" data-node="page-initialization">
+                        <div class="swiper-container swiper-vertical">
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <span>
+                                        <div style='margin-top:30%;'></div>
+                                        <div class="login-screen-title">
+                                            K12 Gradebook
+                                        </div><br/><br/>
+                                        <div class='row no-gutter'>
+                                            <div class='col-10'></div>
+                                            <div class='col-80'>
+                                                <form id='form_getIP'  method="get" action="">
+                                                    <div class="list-block inputs-list">
+                                                        <div class="item-inner">
+                                                            <div class="item-title label" style="font-size: 16px;">IP Address 
+                                                                <a class="open-popup" data-popup=".ip-help">
+                                                                    <i class="zmdi zmdi-pin-help zmdi-hc-1x"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="item-input" style='border-bottom:1px solid #fff;'>
+                                                                <input id='field_ipAddress' type="text" name="field_ipAddress" data-error=".error_ipAddress" placeholder="Enter IP Address">
+                                                            </div>
+                                                            <div class="error_ipAddress text-right"></div> 
+                                                        </div>
+                                                        <p class="buttons-row"><button class="button button-fill color-orange no-ripple" type="submit">Access</button></p>
+                                                    </div>
+
+                                                    <div class="item-inner">
+                                                        <div class="item-input row">
+                                                            <div class=" col-10">
+                                                                <label class="label-switch" style="top: 0px;">
+                                                                    <input type="checkbox" name="field_rememberIPAddress">
+                                                                    <div class="checkbox"></div>
+                                                                </label>
+                                                            </div>  
+                                                            <div class=" col-80">
+                                                                <div class="item-title label">Remember IP address</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>                                
+                                            </div>
+                                            <div class='col-10'></div>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="swiper-slide">
+                                    <span>
+                                        <div style='margin-top:30%;'></div>
+                                        <div class="login-screen-title">
+                                            K12 Gradebook
+                                        </div><br/><br/>
+                                        <div class='row no-gutter'>
+                                            <div class='col-10'></div>
+                                            <div class='col-80'>
+                                                <form id='form_login' method="get" action="">
+                                                    <div class="list-block inputs-list">
+                                                        <div class="item-inner">
+                                                            <div class="item-title label" style="font-size: 16px;">Username:</div>
+                                                            <div class="item-input" style='border-bottom:1px solid #fff;'>
+                                                                <input id='field_username' type="text" name="field_username" data-error=".error_username" placeholder="Enter Username">
+                                                            </div>
+                                                            <div class="error_username"></div> 
+                                                        </div>
+                                                        <div class="item-inner">
+                                                            <div class="item-title label" style="font-size: 16px;">Password:</div>
+                                                            <div class="item-input" style='border-bottom:1px solid #fff;'>
+                                                                <input id='field_password' type="password" name="field_password" data-error=".error_password" placeholder="Enter Password">
+                                                            </div>
+                                                            <div class="error_password"></div> 
+                                                        </div>
+                                                        <p class="buttons-row"><button data-cmd="checkIP" class="button button-fill color-orange no-ripple" type="submit">Log in</button></p>
+                                                        <div class="item-inner">
+                                                            <div class="item-input row">
+                                                                <div class=" col-10">
+                                                                    <label class="label-switch" style="top: 0px;">
+                                                                        <input type="checkbox" name="field_rememberLogin">
+                                                                        <div class="checkbox"></div>
+                                                                    </label>
+                                                                </div>  
+                                                                <div class=" col-80">
+                                                                    <div class="item-title label">Remember me</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>                                
+                                            </div>
+                                            <div class='col-10'></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup loader">
+            <div style="position: relative; top: 15%;">
+                <div class="login-screen-title">
+                    <img width="200px" src="img/logo.png"/>
+                </div><br/><br/>
+                <div class='row no-gutter'>
+                    <div class='col-10'></div>
+                    <div class='col-80'>
+                        <p class="text-center">Loading...</p>
+                    </div>
+                    <div class='col-10'></div>
+                </div>
+            </div>                          
+        </div>
+        <div class="popup developer">
+            <div style="position: relative; top: 15%;">
+                <div class="login-screen-title">
+                    <img width="200px" src="img/logo.png"/>
+                </div><br/><br/>
+                <div class='row no-gutter'>
+                    <div class='col-10'></div>
+                    <div class='col-80'>
+                        <p class="text-center">Loading...</p>
+                    </div>
+                    <div class='col-10'></div>
+                </div>
+            </div>                          
+        </div>
+    </body>
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.js"></script>
+    <script type="text/javascript" src="js/welcomescreen.js"></script>
+    <script type="text/javascript" src="js/myapp/pages/IndexPageController.js"></script>
+    <script type="text/javascript" src="js/myapp/init.js"></script>
+    <script type="text/javascript" src="js/process.js"></script>
+    <script type="text/javascript" src="js/jquery.particleground.min.js"></script>
+    <script type="text/javascript" src="js/jquery.particleground.min.js"></script>
+    <script type="text/javascript" src="js/defiant.min.js"></script>
+    <script type="text/javascript" src="js/plugins/validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/plugins/validation/additional-methods.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="js/plugins/dataTables/dataTables.material.min.js"></script>
+</html>
