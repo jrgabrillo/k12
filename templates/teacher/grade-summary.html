@@ -18,22 +18,20 @@
 					<div class="">
 						<div class="">
 							<div class="row">
-								<div class="input-field col s3">
-									<label for="field_teacher" class='active'>Teacher: </label>
-									<select class="select-dropdown" id='field_teacher' name="field_teacher" data-error=".error_teacher"><option disabled='' selected>Choose subject</option></select>
-									<br/><div class="error_teacher"></div>	
+								<div class="input-field col s12 hidden">
+									<input id='field_teacher' value="" name="field_teacher" data-error=".error_year">
 								</div>
-								<div class="input-field col s3">
+								<div class="input-field col s4">
 									<label for="field_year" class='active'>Year: </label>
 									<select class="select-dropdown" id='field_year' name="field_year" data-error=".error_year"><option disabled='' selected>Choose subject</option></select>
 									<br/><div class="error_year"></div>	
 								</div>
-								<div class="input-field col s3">
+								<div class="input-field col s4">
 									<label for="field_section" class='active'>Section: </label>
 									<select class="select-dropdown" id='field_section' name="field_section" data-error=".error_section" disabled><option disabled='' selected>Choose subject</option></select>
 									<br/><div class="error_section"></div>	
 								</div>
-								<div class="input-field col s3">
+								<div class="input-field col s4">
 									<button class="btn blue waves-effect waves-light">Show grade sheet</button>
 								</div>
 							</div>
@@ -51,8 +49,8 @@
         </div>
         <div class="section">
 		    <div class="row">
-            	<div id='display_graphicalStudentList'></div>	
-            	<div id='display_simpleStudentList'><h5 class='center-align grey-text lighten-3'><br/><br/><br/><i>Load Summary of Grades</i></h5></div>
+            	<div id='display_simpleStudentList'></div>
+            	<div id='display_graphicalStudentList' class='hidden'><h5 class='center-align grey-text lighten-3'><br/><br/><br/><i>Load Summary of Grades</i></h5></div>	
 		    </div>
 		    <div class="row hidden">
             	<div id='print_gradeArea'></div>
@@ -63,14 +61,10 @@
 <!-- <script src="../assets/js/plugins/print/print.js"></script> -->
 <script src="../assets/js/jQuery.print.js"></script>
 <script type="text/javascript">
+	$("#field_teacher").val(localStorage.getItem('teacher_id'));
 	grading.list_summaryGrade();
     $("select").material_select();
 	$(document).ready(function(){
 		$('.tooltipped').tooltip({delay: 50});
 	});
 </script>
-<style type="text/css">
-	td, th {
-	    border-radius: 0px;
-	}
-</style>

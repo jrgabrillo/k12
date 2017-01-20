@@ -5,8 +5,8 @@
 				<h5 class="breadcrumbs-title">Students information</h5>
 				<ol class="breadcrumbs">
 					<li><a href="../account/">Dashboard</a></li>
-					<li><a href="../account/#cmd=index;content=student-list">Students list</a></li>
-					<li class="active">Students information</li>
+					<li><a href="../account/#cmd=index;content=teachers-list">Teachers list</a></li>
+					<li class="active">Teacher's information</li>
 				</ol>
 			</div>
 		</div>
@@ -22,22 +22,16 @@
 				                    <img class="activator" src="../assets/img/bg-banner.jpg" alt="user bg" id='_schoolBanner'>
 				                </div>
 				                <div class="card-content">
-				                    <img src="../assets/img/logo.png" alt="" class="circle responsive-img activator card-profile-image" id='_studentAvatar'>
-				                    <span class="card-title activator grey-text text-darken-4" id='_studentName'>Student Name</span>
+				                    <img src="../assets/img/logo.png" alt="" class="circle responsive-img activator card-profile-image" id='_teacherAvatar'>
+				                    <span class="card-title activator grey-text text-darken-4" id='_teacherName'>Rufo N. Gabrillo Jr.</span>
 				                    <div class="divider"></div>
-				                    <p><strong>Student ID: </strong><span id='_studentID'></span></p>
+				                    <p><strong>Username: </strong><span id='_teacherUsername'></span></p>
 				                    <div class="divider"></div>
-				                    <p><strong>Year / Section: </strong><span id='_studentYear'></span> / <span id='_studentSection'></span></p>
+				                    <p><strong>Password: </strong><span id='_teacherPassword'></span></p>
 				                    <div class="divider"></div>
-					            	<div id='disply_studentInfo'></div>
+				                    <p><strong>Assigned Subject: </strong><span id='_teacherAssigned'></span><div id='_displayTeacherAssigned'></div></p>
 				                </div>
 			                </div>
-				            <div class='profile-info'>
-				                <h2 class='no-margins'></h2>
-				                <h4></h4>
-				                <small></small>
-				                <div></div>
-				            </div>
 				        </div>
 		            </div>
 		        </div>
@@ -56,9 +50,7 @@
 		$('.tooltipped').tooltip({delay: 50});
 	});
 
-	info = window.location.href.split(';');
-    info = info[2].split('=');
-	account.display_studentInfo(info[1]);
+	teacher.info();
 	$('.wrapper').click(function(){
 		$(".material-tooltip").hide(100);
 	});

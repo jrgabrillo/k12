@@ -7,20 +7,20 @@
     <meta name="msapplication-tap-highlight" content="no">
     <title>K12</title>
 
-    <link rel="icon" href="http://demo.geekslabs.com/materialize/v3.1/images/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" href="" sizes="32x32">
     <link rel="apple-touch-icon-precomposed" href="http://demo.geekslabs.com/materialize/v3.1/images/favicon/apple-touch-icon-152x152.png">
     <meta name="msapplication-TileColor" content="#00bcd4">
     <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">  
     <link media="screen" href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link media="screen" href="assets/css/style.min.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link media="screen" href="assets/css/custom.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link media="screen" href="assets/css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link media="screen" href="assets/css/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link media="screen" href="assets/css/icons.css" type="text/css" rel="stylesheet">
     <link media="screen" href="assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
   </head>
 
 <body class='cyan'>
+    <div id='block-control' class=''></div>
     <div class="progress hide-on-med-and-up hide-on-med-and-down" style="margin: 0rem 0 1rem 0;">
         <div class="indeterminate"></div>
     </div>
@@ -32,25 +32,66 @@
     <div id="">
         <div class="wrapper">
             <div class="container">
-                <div class="section hide-on-med-and-up hide-on-med-and-down" id="display_schoolDetails">
+                <div class="section hidden" id="display_schoolDetails">
                     <div class="row">
-                        <div class="col m3 l3 card animated wobble"></div>
-                        <div class="col s12 m6 l6 animated wobble">
+                        <div class="col s12 offset-m3 offset-l3 m6 l6 animated wobble">
                             <div id="profile-card" class='show-data card'>
                                 <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="assets/img/img-bg.jpg" alt="user bg">
+                                    <img class="" id='_schoolBanner' src="assets/img/bg-banner.jpg" alt="user bg" style="height:100%;">
                                 </div>
                                 <div class="card-content">
-                                    <img src="assets/img/logo.png" alt="" class="circle responsive-img activator card-profile-image">
-                                    <span class="card-title activator grey-text text-darken-4">Name Of the School</span>
-                                    <p><i class="mdi-action-grade"></i> Rigion 1</p>
-                                    <p><i class="mdi-action-grade"></i> Division 1</p>
-                                    <p><i class="mdi-action-grade"></i> School ID</p>
-                                    <p><i class="mdi-action-grade"></i> School Year</p>
+                                    <img src="" id='_schoolLogo' alt="" class="circle logo responsive-img card-profile-image">
+                                    <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right tooltipped" data-position="left" data-tooltip="Log In">
+                                        <i class="mdi-communication-vpn-key"></i>
+                                    </a>
+                                    <span class="card-title activator grey-text text-darken-4" id='_schoolName'>K12 Grading System</span>
+                                    <div class="divider"></div>
+                                    <p><strong>School Address: </strong><span id='_schoolAddress'>-</span></p>
+                                    <div class="divider"></div>
+                                    <p><strong>School ID: </strong><span id='_schoolSchoolID'>-</span></p>
+                                    <div class="divider"></div>
+                                    <p><strong>School Year: </strong><span id='_schoolSchoolYear'>-</span></p>
+                                    <div class="divider"></div>
+                                    <p><strong>Region: </strong><span id='_schoolRegion'>-</span></p>
+                                    <div class="divider"></div>
+                                    <p><strong>Division: </strong><span id='_schoolDivision'>-</span></p>
                                 </div>
                                 <div class="card-reveal" style="display: none; transform: translateY(0px);">
-                                    <span class="card-title grey-text text-darken-4">Name Of the School<i class="mdi-navigation-close right"></i></span>
-                                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                    <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i></span>
+                                    <p>
+                                        <div class="col s8 offset-s2">
+                                            <form class="login-form center-align">
+                                                <div class="row">
+                                                    <div class="input-field col s12 center">
+                                                        <img src="assets/img/logo.png" alt="" class="circle responsive-img valign logo profile-image-login">
+                                                        <p class="center login-form-text">K12 System</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row margin">
+                                                    <div class="row margin">
+                                                        <div class="input-field col s12">
+                                                            <i class="mdi-social-person-outline prefix"></i>
+                                                                <input id='field_loginUsername' type="text" name="field_loginUsername" data-error=".error_loginUsername">
+                                                                <label for="field_loginUsername">Username</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="mdi-action-lock-outline prefix"></i>
+                                                                <input id='field_loginPassword' type="password" name="field_loginPassword" data-error=".error_loginPassword">
+                                                                <label for="field_loginPassword">Password</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row margin">
+                                                            <div class="input-field col s12">
+                                                            <button href="#" class="btn waves-effect waves-light blue" data-cmd='login'>Login</button>
+                                                        </div>
+                                                        <div class="row">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -72,118 +113,48 @@
                         </div>
                     </div>
                 </div>
-                <div class="section hide-on-med-and-up hide-on-med-and-down" id="display_login">
-                    <div class="row">
-                        <div class="col m4 l4 card animated wobble"></div>
-                        <div class="col s12 m4 l4 animated wobble">
-                            <div class="card">
-                                <div class="col s12 m12 l12">
-                                    <form class="login-form">
-                                        <div class="row">
-                                            <div class="input-field col s12 center">
-                                                <img src="assets/img/logo.png" alt="" class="circle responsive-img valign profile-image-login">
-                                                <p class="center login-form-text">K12 System</p>
-                                            </div>
-                                        </div>
-                                        <div class="row margin">
-                                            <div class="row margin">
-                                                <div class="row margin" id='display_loginFailed'>
-                                                    <div class="card red hide-on-med-and-up hide-on-med-and-down">
-                                                        <div class="card-content white-text">
-                                                            <p><i class="mdi-alert-error"></i> Login failed</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card green hide-on-med-and-up hide-on-med-and-down">
-                                                        <div class="card-content white-text">
-                                                            <p><i class="mdi-navigation-check"></i> Login success. You will be redirected.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="input-field col s12">
-                                                    <i class="mdi-social-person-outline prefix"></i>
-                                                        <input name="username" class='' type="text">
-                                                        <label for="username" class="center-align">Username</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-field col s12">
-                                                    <i class="mdi-action-lock-outline prefix"></i>
-                                                        <input name="password" class='' type="password">
-                                                        <label for="password">Password</label>
-                                                    </div>
-                                                </div>
-                                                <div class="row margin">
-                                                    <div class="input-field col s12">
-                                                    <a href="#" class="btn waves-effect waves-light col s12 blue" data-cmd='login'>Login</a>
-                                                </div>
-                                                <div class="row">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="fixed-action-btn" style="bottom: 50px; right: 19px;">
-                    <a class="btn-floating btn-large blue" data-position="left" data-tooltip="Options">
-                        <i class="mdi-navigation-more-vert"></i>
-                    </a>
-                    <ul>
-                        <li><a href="" class="btn-floating blue darken-1 tooltipped mdi-communication-vpn-key" data-position="left" data-tooltip="Log In"></a></li>
-                        <li><a href="" class="btn-floating blue darken-1 tooltipped mdi-content-content-copy" data-position="left" data-tooltip="Landing Page"><i class="large mdi-device-now-widgets"></i></a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
+    <div class="hiddendiv common"></div>
+    <div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+    <div class="drag-target" style="right: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
     <script type="text/javascript" src="assets/js/jquery-2.1.1.js"></script>    
     <script type="text/javascript" src="assets/js/materialize.min.js"></script>
     <script type="text/javascript" src="assets/js/prism.js"></script>
     <script type="text/javascript" src="assets/js/perfect-scrollbar.min.js"></script>
     <script type="text/javascript" src="assets/js/masonry.pkgd.min.js"></script>
-    <script type="text/javascript" src="assets/js/imagesloaded.pkgd.min.js"></script>    
+    <script type="text/javascript" src="assets/js/imagesloaded.pkgd.min.js"></script>
     <script type="text/javascript" src="assets/js/plugins.min.js"></script>
-    <script type="text/javascript" src="assets/js/custom-script.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/validation/additional-methods.min.js"></script>
     <script type="text/javascript" src="assets/js/plugins/toastr/toastr.min.js"></script>
 
     <script type="text/javascript" src="assets/js/app.js"></script>
-    <script type="text/javascript" src="https://jrgabrillo.github.io/el7836/process.js"></script>
+    <script type="text/javascript" src="assets/js/process.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-
             ini.ini();
-
-            var id = window.location.href.split("#");
-            if(id.length>1){
-                //show update
-                $('div').find('.update-data').removeClass("hide-on-med-and-up hide-on-med-and-down");
-                $('div').find('.show-data').addClass("hide-on-med-and-up hide-on-med-and-down");
-            }
-
+            account.display_schoolInfo('assets/harmony/Process.php?get-schoolInfo',false);
         });
 
         $(window).load(function() {
             window.loaded = true;
         });
 
-        if(window.loaded){
-            var $containerProducts = $("#products");
-                $containerProducts.imagesLoaded(function() {
-                    $containerProducts.masonry({
-                        itemSelector: ".product",
-                        columnWidth: ".product-sizer",
-                    });
-                });
+        // if(window.loaded){
+        //     var $containerProducts = $("#products");
+        //         $containerProducts.imagesLoaded(function() {
+        //             $containerProducts.masonry({
+        //                 itemSelector: ".product",
+        //                 columnWidth: ".product-sizer",
+        //             });
+        //         });
 
-            $(document).ready(function(){
-                $('.tooltipped').tooltip();
-            });                
-        }
+        //     $(document).ready(function(){
+        //         $('.tooltipped').tooltip();
+        //     });                
+        // }
     </script>
-
-    <div class="hiddendiv common"></div>
-    <div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
-    <div class="drag-target" style="right: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
 </body>
 </html>

@@ -1,0 +1,30 @@
+<form id='form_assignSubject' class="formValidate col s12" method="get" action="" novalidate="novalidate">
+	<div class="row">
+		<div class="input-field col s4">
+			<label for="field_year" class='active'>Year: </label>
+			<select class="select-dropdown" id='field_year' name="field_year" data-error=".error_year"><option disabled='' selected>Choose subject</option></select>
+			<br/><div class="error_year"></div>	
+		</div>
+		<div class="input-field col s4">
+			<label for="field_section" class='active'>Section: </label>
+			<select class="select-dropdown" id='field_section' name="field_section" data-error=".error_section" disabled><option disabled='' selected>Choose subject</option></select>
+			<br/><div class="error_section"></div>	
+		</div>
+		<div class="input-field col s4">
+			<label for="field_subject" class='active'>Subject: </label>
+			<select class="select-dropdown" id='field_subject' name="field_subject" data-error=".error_subject" disabled><option disabled='' selected>Choose subject</option></select>
+			<small class="error_subject"></small>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-field col s2">
+			<button disabled="" id="btn_assignSubject" class="btn grey waves-effect waves-light right" type="submit">Add</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	teacher.control_options();
+	$(".close-modal").click(function(){
+		$(".bottom-sheet").closeModal();
+	});
+</script>

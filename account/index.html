@@ -11,87 +11,60 @@
     <link media="screen" href="../assets/css/materialize.min.css" type="text/css" rel="stylesheet">
     <link media="screen" href="../assets/css/style.min.css" type="text/css" rel="stylesheet" >
     <link media="screen" href="../assets/css/custom.min.css" type="text/css" rel="stylesheet" >
-    <link media="screen" href="../assets/css/prism.css" type="text/css" rel="stylesheet" >
     <link media="screen" href="../assets/css/perfect-scrollbar.css" type="text/css" rel="stylesheet" >
     <link media="screen" href="../assets/css/icons.css" type="text/css" rel="stylesheet">
     <link media="screen" href="../assets/css/plugins/cropper/cropper.min.css" type="text/css" rel="stylesheet">
     <link media="screen" href="../assets/css/plugins/dataTables/dataTables.tableTools.min.css" type="text/css" rel="stylesheet">
     <link media="screen" href="../assets/css/plugins/dataTables/dataTables.responsive.css" type="text/css" rel="stylesheet">
+    <link media="screen" href="../assets/css/plugins/datapicker/datepicker3.css" type="text/css" rel="stylesheet">
     <link media="screen" href="../assets/css/plugins/dataTables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
-  </head>
 
+    <link media="print" href="../assets/css/style.min.css" type="text/css" rel="stylesheet" >
+    <link media="print" href="../assets/css/materialize.min.css" type="text/css" rel="stylesheet">
+    <link media="print" href="../assets/css/plugins/dataTables/dataTables.tableTools.min.css" type="text/css" rel="stylesheet">
+    <link media="print" href="../assets/css/plugins/dataTables/dataTables.responsive.css" type="text/css" rel="stylesheet">
+    <link media="print" href="../assets/css/plugins/datapicker/datepicker3.css" type="text/css" rel="stylesheet">
+    <link media="print" href="../assets/css/plugins/dataTables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
+  </head>
 <body>
-    <div class="progress hide-on-med-and-up hide-on-med-and-down" style="margin: 0rem 0 1rem 0;">
-        <div class="indeterminate"></div>
-    </div>
+    <div id='block-control' class=''></div>
     <div id="loader-wrapper">
         <div id="loader"></div>        
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
-    <header id="header" class="page-topbar">
-        <div class="navbar-fixed">
+    <div id="" class="page-topbar">
+        <div class="navbar-fixed" style='transition: all 0.3s ease-out;'>
             <nav class="navbar-color red lighten-1">
-                <div class="nav-wrapper">
-                    <ul class="left">                      
-                        <li>
-                            <h1 class="logo-wrapper">
-                                <a href="#" class="brand-logo darken-1">
-                                    <img src="../assets/img/materialize-logo.png" alt="materialize logo">
-                                </a>
-                                <span class="logo-text">Materialize</span>
-                            </h1>
-                        </li>
-                    </ul>
+                <div class="nav-wrapper row">
+                    <div class="col s12">
+                        <a href="" class="brand-logo">K12 Grading System</a>
+                    </div>
+                    <div class="progress hide-on-med-and-up hide-on-med-and-down" style="margin: 0rem 0 1rem 0;">
+                        <div class="indeterminate white"></div>
+                    </div>
                 </div>
             </nav>
         </div>
-    </header>
+    </div>
 
     <div id="main">
         <div class="wrapper">
             <aside id="left-sidebar-nav text-red">
                 <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y" style="width: 240px;">
-                    <li class="user-details red darken-3" id='user-account'>
+                    <li class="blue darken-1" id='user-account' style='padding-top: 10px;'>
                         <div class="row">
                             <div class="col col s4 m4 l4">
                                 <img src="../assets/img/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
                             </div>
                             <div class="col col s8 m8 l8">
                                 <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="" data-activates="profile-dropdown">Teacher John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a><ul id="profile-dropdown" class="dropdown-content">
-                                    <li><a href=""><i class="mdi-action-face-unlock"></i> Profile</a></li>
-                                    <li><a href=""><i class="mdi-action-settings"></i> Settings</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href=""><i class="mdi-action-lock-outline"></i> Lock</a></li>
-                                    <li><a href=""><i class="mdi-hardware-keyboard-tab"></i> Logout</a></li>
+                                    <li><a href="#" data-cmd='log-out'><i class="mdi-hardware-keyboard-tab"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class="no-padding">
-                        <ul class="collapsible collapsible-accordion">
-                            <li class="bold">
-                                <a href='#cmd=index;content=schoolInfo' class="waves-effect waves-blue black-text"><i class="mdi-action-dashboard"></i> Dashboard</a>
-                            </li>
-                            <li class="bold">
-                                <a class="collapsible-header waves-effect waves-blue black-text"><i class="mdi-action-account-circle"></i> Students</a>
-                                <div class="collapsible-body" style="">
-                                    <ul>
-                                        <li><a href="#cmd=index;content=student-list">List</a></li>
-                                        <li><a href="#cmd=index;content=student-register">Add</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="bold">
-                                <a href='#cmd=index;content=section-list' class="waves-effect waves-blue black-text"><i class="mdi-action-view-list"></i> Section</a>
-                            </li>
-                            <li class="bold">
-                                <a href='#cmd=index;content=grade-sheet' class="waves-effect waves-black black-text"><i class="mdi-image-grid-on"></i> Grade Sheet</a>
-                            </li>
-                            <li class="bold">
-                                <a href='#cmd=index;content=grade-summary' class="waves-effect waves-black black-text"><i class="mdi-notification-event-note"></i> Summary Grades</a>
-                            </li>
-                        </ul>
+                    <li class="no-padding" id='navigation'>
                     </li>
                 </ul>
                 <a href="" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
@@ -104,27 +77,30 @@
     <footer class="page-footer  red lighten-1">
         <div class="footer-copyright">
             <div class="container">
-                <span>Copyright © 2015 Apparato All rights reserved.</span>
-                <span class="right"> Design and Developed by Apparato</span>
+                <span>Copyright © 2016 Rufo All rights reserved.</span>
+                <span class="right"> Design and Developed by <b><a href='https://github.com/jrGabrillo/'>Rufo N. Gabrillo Jr.</a></b></span>
             </div>
         </div>
     </footer>
     <script type="text/javascript" src="../assets/js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
     <script type="text/javascript" src="../assets/js/prism.js"></script>
     <script type="text/javascript" src="../assets/js/perfect-scrollbar.min.js"></script>
     <script type="text/javascript" src="../assets/js/plugins.min.js"></script>
     <script type="text/javascript" src="../assets/js/defiant.min.js"></script>
     <script type="text/javascript" src="../assets/js/app.js"></script>
-    <script type="text/javascript" src="https://jrgabrillo.github.io/el7836/process.js"></script>
+    <script type="text/javascript" src="../assets/js/process.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/jquery-hashchange/jquery.hashchange.min.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/cropper/cropper.min.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/validation/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/validation/additional-methods.min.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.responsive.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.fixedcolumns.js"></script>
     <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
-    <script type="text/javascript" src="../assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="../assets/js/papaparse.js"></script>
     <script type="text/javascript">
         account.ini();
         App.init();
@@ -132,7 +108,6 @@
             window.loaded = true;
         });
     </script>
-
     <div class="hiddendiv common"></div>
     <div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
     <div class="drag-target" style="right: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
