@@ -42,6 +42,10 @@ PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table `tbl_grades`-- 
+INSERT INTO `tbl_grades` (`id`, `highest_score`, `scores`, `quarter`, `details`, `component`, `date`, `teacher_id`) VALUES 
+('356a192b7913b04c54574d18c28d46e6395428ab', '20', '[{"id":"16-LNSHS-0091","score":"12"},{"id":"16-LNSHS-0098","score":"12"},{"id":"16-LNSHS-0093","score":"12"},{"id":"16-LNSHS-0086","score":"14"},{"id":"16-LNSHS-0106","score":"16"},{"id":"16-LNSHS-0120","score":"18"},{"id":"16-LNSHS-0111","score":"19"},{"id":"16-LNSHS-0085","score":"17"},{"id":"16-LNSHS-0094","score":"16"},{"id":"16-LNSHS-0108","score":"13"},{"id":"16-LNSHS-0089","score":"16"},{"id":"16-LNSHS-0102","score":"16"},{"id":"16-LNSHS-0117","score":"15"},{"id":"16-LNSHS-0100","score":"16"},{"id":"16-LNSHS-0087","score":"14"},{"id":"16-LNSHS-0092","score":"14"},{"id":"16-LNSHS-0101","score":"16"},{"id":"16-LNSHS-0095","score":"18"},{"id":"16-LNSHS-0088","score":"19"},{"id":"16-LNSHS-0114","score":"17"},{"id":"16-LNSHS-0119","score":"16"},{"id":"16-LNSHS-0084","score":"15"},{"id":"16-LNSHS-0116","score":"13"},{"id":"16-LNSHS-0107","score":"9"},{"id":"16-LNSHS-0096","score":"8"},{"id":"16-LNSHS-0118","score":"8"},{"id":"16-LNSHS-0090","score":"15"},{"id":"16-LNSHS-0099","score":"20"},{"id":"16-LNSHS-0110","score":"12"},{"id":"16-LNSHS-0104","score":"8"},{"id":"16-LNSHS-0112","score":"4"},{"id":"16-LNSHS-0103","score":"17"},{"id":"16-LNSHS-0113","score":"16"},{"id":"16-LNSHS-0115","score":"1"},{"id":"16-LNSHS-0109","score":"19"},{"id":"16-LNSHS-0105","score":"15"},{"id":"16-LNSHS-0097","score":"14"}]', 'First Quarter', '["Grade 1","Section 2",["Filipino 1",""]]', 'Performance Task', '2017-05-02 16:51:49', '356a192b7913b04c54574d18c28d46e6395428ab'),
+('b6589fc6ab0dc82cf12099d1c2d40ab994e8410c', '50', '[{"id":"16-LNSHS-0091","score":"40"},{"id":"16-LNSHS-0098","score":"40"},{"id":"16-LNSHS-0093","score":"49"},{"id":"16-LNSHS-0086","score":"38"},{"id":"16-LNSHS-0106","score":"48"},{"id":"16-LNSHS-0120","score":"28"},{"id":"16-LNSHS-0111","score":"39"},{"id":"16-LNSHS-0085","score":"49"},{"id":"16-LNSHS-0094","score":"32"},{"id":"16-LNSHS-0108","score":"17"},{"id":"16-LNSHS-0089","score":"37"},{"id":"16-LNSHS-0102","score":"28"},{"id":"16-LNSHS-0117","score":"38"},{"id":"16-LNSHS-0100","score":"45"},{"id":"16-LNSHS-0087","score":"50"},{"id":"16-LNSHS-0092","score":"23"},{"id":"16-LNSHS-0101","score":"34"},{"id":"16-LNSHS-0095","score":"12"},{"id":"16-LNSHS-0088","score":"31"},{"id":"16-LNSHS-0114","score":"43"},{"id":"16-LNSHS-0119","score":"31"},{"id":"16-LNSHS-0084","score":"12"},{"id":"16-LNSHS-0116","score":"34"},{"id":"16-LNSHS-0107","score":"43"},{"id":"16-LNSHS-0096","score":"34"},{"id":"16-LNSHS-0118","score":"23"},{"id":"16-LNSHS-0090","score":"2"},{"id":"16-LNSHS-0099","score":"34"},{"id":"16-LNSHS-0110","score":"23"},{"id":"16-LNSHS-0104","score":"34"},{"id":"16-LNSHS-0112","score":"45"},{"id":"16-LNSHS-0103","score":"45"},{"id":"16-LNSHS-0113","score":"44"},{"id":"16-LNSHS-0115","score":"34"},{"id":"16-LNSHS-0109","score":"23"},{"id":"16-LNSHS-0105","score":"45"},{"id":"16-LNSHS-0097","score":"43"}]', 'First Quarter', '["Grade 1","Section 2",["Filipino 1",""]]', 'Written Works', '2017-05-02 16:41:06', '356a192b7913b04c54574d18c28d46e6395428ab');
+
 
 
 -- Table structure for `tbl_schoolinfo`-- 
@@ -59,7 +63,7 @@ PRIMARY KEY (`id`)
 
 -- Dumping data for table `tbl_schoolinfo`-- 
 INSERT INTO `tbl_schoolinfo` (`id`, `schoolName`, `schoolID`, `schoolYearStart`, `schoolYearEnd`, `region`, `division`, `details`) VALUES 
-('b6589fc6ab0dc82cf12099d1c2d40ab994e8410c', 'Mangaldan National High School', '123456', '06-2016', '03-2017', 'Region 1', '2', '["logo.png","df58248c414f342c81e056b40bee12d17a08bf61-1484623663.apr","Mangaldan, Pangasinan"]');
+('b6589fc6ab0dc82cf12099d1c2d40ab994e8410c', 'Mangaldan National High School', '123456', '06-2016', '07-2017', 'Region 1', '2', '["logo.png","df58248c414f342c81e056b40bee12d17a08bf61-1484623663.apr","Mangaldan, Pangasinan"]');
 
 
 
@@ -83,7 +87,7 @@ INSERT INTO `tbl_section` (`id`, `section`, `order`, `year`) VALUES
 -- Table structure for `tbl_student`-- 
 CREATE TABLE IF NOT EXISTS `tbl_student` (
 `id` varchar(50) NOT NULL,
-`student_id` varchar(20) NOT NULL,
+`student_id` varchar(50) NOT NULL,
 `year` varchar(20) NOT NULL,
 `section` varchar(20) NOT NULL,
 `date` varchar(20) NOT NULL,
@@ -190,7 +194,7 @@ INSERT INTO `tbl_studentinfo` (`id`, `family_name`, `given_name`, `middle_name`,
 ('cb4e5208b4cd87268b208e49452ed6e89a68e0b8', 'TANDOC', 'Mikee Efren', 'Cruz', 'Male', '2/25/1993', '', '', '', '', '', '', '', 'avatar.jpg', '2017-01-17 11:48:05', '16-LNSHS-0114'),
 ('cb7a1d775e800fd1ee4049f7dca9e041eb9ba083', 'VILLANUEVA', 'Al Nicholson', 'Pinzon', 'Male', '3/2/1993', '', '', '', '', '', '', '', 'avatar.jpg', '2017-01-17 11:48:05', '16-LNSHS-0119'),
 ('d435a6cdd786300dff204ee7c2ef942d3e9034e2', 'SISON', 'Rhea Lyn', 'Versoza', 'Female', '2/16/1993', '', '', '', '', '', '', '', 'avatar.jpg', '2017-01-17 11:48:05', '16-LNSHS-0105'),
-('da4b9237bacccdf19c0760cab7aec4a8359010b0', 'ADONIS', 'John Glenn', 'Tandoc', 'Male', '1/26/1993', 'Place of Birth', 'Permanent Address', 'Citizenship', 'Height', 'Weight', 'y', 'x', 'avatar.jpg', '2017-01-17 11:48:05', '16-LNSHS-0084'),
+('da4b9237bacccdf19c0760cab7aec4a8359010b0', 'ADONIS', 'John Glenn', 'Tandoc', 'Male', '04/6/2017', 'Place of Birth', 'Permanent Address', 'Citizenship', 'Height', 'Weight', 'werty', 'qwerty', 'avatar.jpg', '2017-01-17 11:48:05', '16-LNSHS-0084'),
 ('f1abd670358e036c31296e66b3b66c382ac00812', 'MERCADO', 'Tina', 'Aviles', 'Female', '2/8/1993', '', '', '', '', '', '', '', 'avatar.jpg', '2017-01-17 11:48:05', '16-LNSHS-0097'),
 ('f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59', 'UNTALAN', 'Jeremy', 'Dela Cruz', 'Male', '2/27/1993', '', '', '', '', '', '', '', 'avatar.jpg', '2017-01-17 11:48:05', '16-LNSHS-0116'),
 ('f6e1126cedebf23e1463aee73f9df08783640400', 'VENTURA', 'Mark Vince', 'Bautista', 'Male', '2/18/1993', '', '', '', '', '', '', '', 'avatar.jpg', '2017-01-17 11:48:05', '16-LNSHS-0107'),
@@ -233,7 +237,7 @@ PRIMARY KEY (`id`)
 -- Dumping data for table `tbl_user`-- 
 INSERT INTO `tbl_user` (`id`, `name`, `username`, `password`, `picture`, `status`) VALUES 
 ('01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 'Administrator', 'admin', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'rufo.jpg', '1'),
-('356a192b7913b04c54574d18c28d46e6395428ab', 'Rufo N. Gabrillo Jr.', 'rufongabrillojr', '63a98072d3ff2e1c18e2e6393a993a44f5d467c5', 'avatar.jpg', '2'),
+('356a192b7913b04c54574d18c28d46e6395428ab', 'Rufo N. Gabrillo Jr.', 'rufongabrillojr', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'avatar.jpg', '2'),
 ('b6589fc6ab0dc82cf12099d1c2d40ab994e8410c', 'Carla Carmela P. Perez', 'carla', 'b67d5291646af614aabb8be2b188eb21322f0c65', 'avatar.jpg', '2');
 
 

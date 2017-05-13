@@ -243,5 +243,16 @@ class DatabaseClasses extends DataClasses{
 
 		return $sql;
 	}
+
+	function delete_file($file){
+		$ret = 0;
+		if(file_exists($file)){
+			$ret = (unlink($file))?1:0;
+		}
+		else{
+			$ret = 0;
+		}
+		return $ret;
+	}
 }
 ?>

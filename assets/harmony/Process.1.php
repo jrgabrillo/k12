@@ -71,25 +71,6 @@ $function = new DatabaseClasses;
 		}
 	}
 
-	if(isset($_GET['auth'])){
-		$data = $_POST['data'];
-		$data = json_decode($data);
-		$username = $data[0];
-		$password = sha1($data[1]);
-		$date = new DateTime();
-		$hash = $date->getTimestamp();
-
-		$query = $function->PDO(true,"SELECT * FROM tbl_user WHERE username = '{$username}' AND password = '{$password}'");
-
-		if(count($query)>0){
-			echo 1;
-		}
-		else{
-			echo 0;
-		}
-	}
-
-
 	//getters
 	if(isset($_GET['get-account'])){
 		if(isset($_SESSION['data'])){
@@ -372,37 +353,6 @@ $function = new DatabaseClasses;
 	}
 
 	//setters
-	if(isset($_GET['set-updateGrades'])){
-		$data = $_POST['data'];
-
-		$id = $data[0]['row'];
-		$q1 = $function->PDO(true,"SELECT * FROM tbl_grades WHERE id ='{$id}'");
-		$q1 = json_decode($q1[0][2]);
-		$scores = [];
-
-		foreach ($q1 as $key => $value) {
-			if($data[0]['id'] == $value->id){
-				$scores[] = ['id'=>$value->id,'score'=>$data[1][0]['value']];
-				// $scores[] = ['id'=>$value->id,'score'=>$data[1][0]['value']];
-			}
-			else{
-				$scores[] = $value;
-			}
-		}
-	
-		// print_r(json_encode($scores));
-
-		$scores = json_encode($scores);
-		$query = $function->PDO(false,"UPDATE tbl_grades SET scores = '{$scores}' WHERE id = '{$id}'");
-		if($query->execute()){
-			echo 1;
-		}
-		else{
-			$Data = $query->errorInfo();
-			print_r($Data);
-		}
-	}
-
 	if(isset($_GET['set-grade'])){
         $id = $function->PDO_IDGenerator('tbl_grades','id');
 		$date = $function->PDO_DateAndTime();
@@ -424,7 +374,7 @@ $function = new DatabaseClasses;
 		$scores = json_encode($scores);
 		$scores = str_replace($replace, $replaceWith, $scores);
 
-		$query = $function->PDO(false,"INSERT INTO tbl_grades(id,highest_score,scores,quarter,details,component,`date`,teacher_id) VALUES ('{$id}','{$highest_score}','{$scores}','{$quarter}','{$details}','{$component}','{$date}','{$data[1]}')");
+		$query = $function->PDO(false,"INSERT INTO  tbl_grades(id,highest_score,scores,quarter,details,component,`date`,teacher_id) VALUES ('{$id}','{$highest_score}','{$scores}','{$quarter}','{$details}','{$component}','{$date}','{$data[1]}')");
 		if($query->execute()){
 			echo 1;
 		}
@@ -582,8 +532,7 @@ $function = new DatabaseClasses;
 		$given_name = $data[1]['value'];
 		$middle_name = $data[2]['value'];
 		$gender = $data[7]['value'];
-		$date_of_birth = date("m/j/Y",strtotime($data[4]['value']));
-
+		$date_of_birth = $data[4]['value'];
 		$place_of_birth = $data[5]['value'];
 		$permanent_address = $data[6]['value'];
 		$citizenship = $data[8]['value'];
@@ -597,16 +546,9 @@ $function = new DatabaseClasses;
 		$educ_year = $data[14]['value'];
 		$educ_section = $data[15]['value'];
 
-		$query = $function->PDO(false,"INSERT INTO  tbl_studentinfo(id,family_name,given_name,middle_name,gender,date_of_birth,place_of_birth,permanent_address,citizenship,height,weight,mother_name,father_name,picture,student_id,`date`) VALUES ('{$id}','{$family_name}','{$given_name}','{$middle_name}','{$gender}','{$date_of_birth}','{$place_of_birth}','{$permanent_address}','{$citizenship}','{$height}','{$weight}','{$mother_name}','{$father_name}','{$picture}','{$studentid}','{$date}');");
+		$query = $function->PDO(false,"INSERT INTO  tbl_studentinfo(id,family_name,given_name,middle_name,gender,date_of_birth,place_of_birth,permanent_address,citizenship,height,weight,mother_name,father_name,picture,student_id,`date`) VALUES ('{$id}','{$family_name}','{$given_name}','{$middle_name}','{$gender}','{$date_of_birth}','{$place_of_birth}','{$permanent_address}','{$citizenship}','{$height}','{$weight}','{$mother_name}','{$father_name}','{$picture}','{$studentid}','{$date}'); INSERT INTO  tbl_student(id,student_id,year,section,`date`) VALUES ('{$id}','{$studentid}','{$educ_year}','{$educ_section}','{$date}')");
 		if($query->execute()){
-			$query = $function->PDO(false,"INSERT INTO  tbl_student(id,student_id,year,section,`date`,status) VALUES ('{$id}','{$studentid}','{$educ_year}','{$educ_section}','{$date}',1)");
-			if($query->execute()){
-				echo 1;
-			}
-			else{
-				$Data = $query->errorInfo();
-				print_r($Data);
-			}
+			echo 1;
 		}
 		else{
 			$Data = $query->errorInfo();
@@ -620,7 +562,7 @@ $function = new DatabaseClasses;
 		$family_name = $data[1]['value'];
 		$given_name = $data[2]['value'];
 		$middle_name = $data[3]['value'];
-		$date_of_birth = date("m/j/Y",strtotime($data[4]['value']));
+		$date_of_birth = $data[4]['value'];
 		$place_of_birth = $data[5]['value'];
 		$permanent_address = $data[6]['value'];
 		$gender = $data[7]['value'];
@@ -787,10 +729,6 @@ $function = new DatabaseClasses;
         	$value = $data[0][0]['value'];
             $Query = $function->PDO_SQLQuery("UPDATE tbl_schoolinfo SET schoolYearEnd = '{$value}' WHERE id = '{$id}'");
         }
-        else if($data[0][0]['name'] == 'field_school_principal'){
-        	$value = json_encode([$details[0],$details[1],$details[2],$data[0][0]['value']]);
-            $Query = $function->PDO_SQLQuery("UPDATE tbl_schoolinfo SET details = '{$value}' WHERE id = '{$id}'");
-        }
 
         if($Query->execute()){
             echo 1;
@@ -825,7 +763,6 @@ $function = new DatabaseClasses;
         foreach ($data as $key => $value) {
 			$query = $function->PDO_ASSOC("SELECT DISTINCT(tbl_studentinfo.student_id) FROM tbl_studentinfo INNER JOIN tbl_student ON tbl_studentinfo.student_id = tbl_student.student_id WHERE tbl_studentinfo.student_id = '$value[0]'");
 			if(count($query)<=0){
-				$value[4] = date("m/j/Y",strtotime($value[4]));
 		        $id = $function->PDO_IDGenerator('tbl_studentinfo','id');
 				$query = $function->PDO(false,"INSERT INTO  tbl_studentinfo(id,family_name,given_name,middle_name,gender,date_of_birth,place_of_birth,permanent_address,height,weight,	mother_name,father_name,citizenship,student_id,picture,`date`) VALUES ('{$id}','{$value[1]}','{$value[2]}','{$value[3]}','{$value[5]}','{$value[4]}','{$value[13]}','{$value[14]}','{$value[9]}','{$value[10]}','{$value[11]}','{$value[12]}','{$value[8]}','{$value[0]}','avatar.jpg','{$date}'); INSERT INTO  tbl_student(id,student_id,year,section,`date`) VALUES ('{$id}','{$value[0]}','{$value[6]}','{$value[7]}','{$date}')");
 				if(!$query->execute()){
@@ -907,16 +844,6 @@ $function = new DatabaseClasses;
 		}
     }
 
-    if(isset($_GET['truncate-grades'])){
-        $Query = $function->PDO_SQLQuery("TRUNCATE tbl_grades");
-        if($Query->execute()){
-	        echo 1;
-        }
-        else{
-	        print_r(json_encode($Query->errorInfo()));
-        }
-    }
-
     if(isset($_GET['delete-assignSubjects'])){
     	$data = $_POST['data'];
         $Query = $function->PDO_SQLQuery("DELETE FROM tbl_assignedsubject WHERE id = '{$data}'");
@@ -946,8 +873,7 @@ $function = new DatabaseClasses;
     if(isset($_GET['buckup-db'])){
 		$db = $function->db_buckup();
     	// print_r($db);
-        // $file = sha1('rufongabrillojr').'-'.time().'.sql';
-        $file = 'k12-'.time().'.sql';
+        $file = sha1('rufongabrillojr').'-'.time().'.sql';
         $handle = fopen('../db/'.$file, 'w+');
 
         if(fwrite($handle, $db)){

@@ -476,9 +476,11 @@ var _process = function(){
 	                else{error.insertAfter(element);}
 	            },
 	            submitHandler: function (form) {
+	            	console.log(form);
 	                var form = $(form).serializeArray();	                
 					var data = system.get_ajax('assets/harmony/Process.php?login',form);
 					data.success(function(data){
+						console.log(data);
 						if(data != 0){
 							Materialize.toast('Login success. You will be redirected.',2000,'',function(){
 						    	$(location).attr('href','account/');
@@ -493,6 +495,58 @@ var _process = function(){
 	            }
 	        });
 		},
+		passwordAuth:function(_success,_failed){
+			var data = localStorage.getItem("account_data");
+			data = JSON.parse(data);
+			var u = data[0][2]
+			var content = "";
+			content = "<form class='formValidate' data-form='passwordAuth' method='get' action='' novalidate='novalidate'>"+
+						"	<div class='row'><div class='col offset-s3 s6'>"+
+						"		<div class='row'>"+
+						"			<div class='input-field col s6'>"+
+						"				<label for='field_passwordAuth' class='active'>Password: </label>"+
+						"	            <input type='password' id='field_passwordAuth' name='field_passwordAuth' data-error='.error_passwordAuth'>"+
+						"				<div class='error_passwordAuth'></div>"+
+						"			</div>"+
+						"		</div>"+
+						"		<div class='input-field col s12'>"+
+						"			<button class='btn blue waves-effect waves-light left' name='passwordAuth' data-cmd='passwordAuth'>Submit</button>"+
+						"		</div>"+
+						"	</div></div>"+
+						"</form>";
+			system.open_modal("<div class='row'><div class='col offset-s3 s6'>Password Authentication</div></div>",content);
+		    $(".formValidate").validate({
+		        rules: {
+		            field_subjectName: {
+		                required: true,
+		                authPassword: true,
+		                minlength: 5,
+		                maxlength: 50
+		            },
+		        },
+		        errorElement : 'div',
+		        errorPlacement: function(error, element) {
+					var placement = $(element).data('error');
+					if(placement){
+						$(placement).append(error)
+					} 
+					else{
+						error.insertAfter(element);
+					}
+				},
+				submitHandler: function (form) {
+					var form = $(form).serializeArray();
+					form = JSON.stringify([u,form[0]['value']]);
+					var data = system.get_ajax('../assets/harmony/Process.php?auth',form);
+					if(data.responseText == 1){
+						_success();
+					}
+					else{
+						_failed();
+					}
+		        }
+			});
+		}
     };
 }();
 
@@ -568,6 +622,7 @@ var account = function(){
 			}
 		},		
 		add_student: function(){
+			console.log('x');
 			$('.datepicker').pickadate({
 				today: '',
 				selectMonths: true,
@@ -607,7 +662,6 @@ var account = function(){
 					$("#display_age").html(age);
 				});
 			});
-
 		    $("#form_registerStudent").validate({
 		        rules: {
 		            field_fname: {required: true,maxlength: 50},
@@ -642,6 +696,7 @@ var account = function(){
 	            },
 				submitHandler: function (form) {
 					var studentInfo = $(form).serializeArray();
+					console.log(studentInfo);
 					var data = system.get_ajax('../assets/harmony/Process.php?set-studentInfo',studentInfo);
 					data.success(function(data){
 						if(data == 1){
@@ -880,6 +935,9 @@ var account = function(){
 			var result = JSON.search(data,'//info[student_id="'+studentID+'"]');
 			var result2 = JSON.search(data,'//educ[student_id="'+studentID+'"]');
 
+			console.log(data);
+			console.log(result2);
+
 			var birthdate = new Date(result[0]["date_of_birth"]);
 			var bg = localStorage.getItem('schoolInformation');
 			bg = JSON.parse(bg); bg = JSON.parse(bg[0][7]); bg = system.get_apr(bg[1]);
@@ -934,18 +992,17 @@ var account = function(){
 					$('.datepicker').pickadate({
 						today: '',
 						selectMonths: true,
-							selectYears: true,
-							format: 'mmmm dd, yyyy',
+		  				selectYears: true,
+		  				format: 'mmmm dd, yyyy',
 						formatSubmit: 'yyyy/mm/dd',
 					});
-	
+
 					$("#field_dob").change(function(){
 						var now = new Date();
 						var dob = new Date($(this).val());
 						var age = Number(now.getFullYear())-Number(dob.getFullYear())
 						$("#display_age").html(age);
 					});
-
 
 		            if(studentsInfo[0]["family_name"]!="")
 		            	$('label[for="field_fname"]').addClass('active');$('#field_fname').val(studentsInfo[0]["family_name"]);
@@ -1008,14 +1065,17 @@ var account = function(){
 				},
 				submitHandler: function (form) {
 					var data = $(form).serializeArray(),newData=[id];
+					console.log(data);
 					$.each(data,function(a,b){
 						if(b['name'] != "field_dob_submit")
 							newData.push(b);
 					});		
 					var birthdate = new Date(newData[4]["value"]);
-					console.log(newData);
+					console.log(birthdate);
+					console.log(newData[4]["value"]);
 
 					var data = system.get_ajax('../assets/harmony/Process.php?set-updateStudentInfo',newData);
+					console.log(data.responseText);
 					data.success(function(data){
 						if(data == 1){
 				        	$('#_studentName').html(newData[1]["value"]+", "+newData[2]["value"]+" "+newData[3]["value"]+"<a data-cmd='updateInfo' class='right  mdi-editor-mode-edit tooltipped' data-tooltip='Update' data-position='left' data-id='e24c8490-0e1e-cd57-d069-6c878f9d0cb9'></a>");
@@ -1766,14 +1826,14 @@ var grading = function(){
 	        var data_gradesAll = JSON.parse(localStorage.getItem('grades_gradeSheetQuarter'));
 	        var data_students = JSON.parse(localStorage.getItem('students_gradingSheet'));
 	        var data_subject = JSON.parse(localStorage.getItem('subject_gradingSheet'));
-			var data_account = system.do_ajax('../assets/harmony/Process.php?get-accountLevel','');
     		var class_grading = '';
 	        var teacherName = "";
 	        var content = "",_content = "", content_finalGrade = "";
     		var components = ['Written Works','Performance Task','Quarterly Assessment'];
+			var data_account = system.do_ajax('../assets/harmony/Process.php?get-accountLevel','');
+			console.log(data_account.responseText);
 			data_account = (data_account.responseText==1)?data_account.responseText:localStorage.getItem('teacherName');
 	        
-
 			if(data_subject.length == 0){
 				Materialize.toast('No data collected.',1000,'',function(){
 					system.loader(false); system.block(false);
@@ -1790,7 +1850,8 @@ var grading = function(){
 
 				if(Number(data_account) == 1){
 					class_grading = 'hidden';
-					teacherName = "<td>Teacher: "+data_account+"</td>";
+					teacherName = "<td>Teacher: "+localStorage.getItem('teacherName')+"</td>";
+					// teacherName = "<td>Teacher: "+data_account+"</td>";
 				}
 
 				var allContent = "",tabs = "",tabContent = "", initialGrade = 0, finalGrade = [], finalGrade_student = [], totalGrade = 0;
@@ -1809,7 +1870,12 @@ var grading = function(){
 									var search = JSON.search(grades, '//*[id="'+value_genderInner[1]['student_id']+'"]/score');
 									sub_headers += "<td class='"+colors[index_grade2]+"'>#"+(index_grade3+1)+"</td>";
 									highScore += "<td class='"+colors[index_grade2]+"'>"+value_grade3[1]+"</td>";
-									sub_columnContent += "<td class='"+colors[index_grade2]+"'>"+search+"</td>";
+
+									var name = value_genderInner[1]['family_name']+" "+value_genderInner[1]['given_name']+", "+value_genderInner[1]['middle_name']
+									var strand = value_grade2[0][5];
+									var data_content = JSON.stringify([{"row":value_grade2[0][0],"highScore":value_grade2[0][1],"rating":search[0],"id":value_genderInner[1]['student_id'],"name":name,"strand":strand}]);
+
+									sub_columnContent += "<td class='"+colors[index_grade2]+"'><a data-cmd='updateGrade' data-content='"+data_content+"'>"+search+"</a></td>";
 									totalScore = totalScore + Number(search);
 									totalHighScore = totalHighScore + Number(value_grade3[1]);
 								});
@@ -1916,7 +1982,7 @@ var grading = function(){
 							  "				    <td>Year: "+data_controls[1]['value']+"</td>"+
 							  "				    <td>Section: "+data_controls[2]['value']+"</td>"+
 							  "				    <td>Subject: "+data_controls[3]['value']+"</td>"+
-							  "				    <td></td>"+
+							  "				    <td width='500px'></td>"+
 							  "				</tr>"+
 							  "			</table>"+
 		   					  "		</blockquote>"+
@@ -2002,16 +2068,95 @@ var grading = function(){
 		 		    grading.grade_printing();
 				});
 			}
+
+			$("a[data-cmd='updateGrade']").click(function(){
+				var data = $(this).data('content');
+				var dataX = data[0];
+				var _this = this;
+				data = data[0];
+
+				var content = "<div class='row'>"+
+						"	<div class='col offset-s3 s6'>"+
+						"		<form class='form_gradesheet' data-form='addGrades' method='get' action='' novalidate='novalidate'>"+
+						"			<div class='col s6'>"+
+						"				<p>Student: "+data.name+"</p>"+
+						"				<p>Current Score: "+data.rating+"</p>"+
+						"				<p>Strand: "+data.strand+"</p><br/>"+
+						"			</div>"+
+						"			<div class='col s6'>"+
+						"				<label for='field_fname'>New Score:</label>"+
+						"				<input type='text' class='field_highGrade' placeholder='New score' name='field_highGrade'>"+
+						"			</div>"+
+						"			<div class='col s12'>"+
+						"				<button class='btn blue waves-effect waves-light'>Save</button>"+
+						"				<a class='close-modal btn-flat waves-effect waves-light'>Cancel</a>"+
+						"			</div>"+
+						"		</form>"+
+						"	</div>"+
+						"</div>";
+
+				system.open_modal("<div class='row'><div class='col offset-s3 s6'>Update grade</div></div>",content);
+
+				$.validator.addClassRules("field_highGrade", {
+				    required: true,
+				    number:true,
+	            	checkRange2:[0,data.highScore]
+				});
+
+			    $(".form_gradesheet").validate({
+			        errorElement : 'div',
+			        errorPlacement: function(error, element) {
+						var placement = $(element).data('error');
+						if(placement){
+							$(placement).append(error)
+						} 
+						else{
+							error.insertAfter(element);
+						}
+					},
+					submitHandler: function (form) {
+						var form = $(form).serializeArray();
+						var data = system.get_ajax('../assets/harmony/Process.php?set-updateGrades',[dataX,form]);
+						data.success(function(data){
+							if(data == 1){
+								Materialize.toast('Save.',4000);
+								system.close_modal();
+								$(_this).html(form[0].value);
+							}
+							else{
+								Materialize.toast('Cannot process request.',4000);
+							}
+						});
+			        }
+				});
+
+				$(".close-modal").click(function(){
+					$(".bottom-sheet").closeModal();
+				});
+			});
 		},
 		grade_printing:function(){
 	        var data_school = JSON.parse(localStorage.getItem('schoolInformation'));
 	        var meta_data_school = JSON.parse(data_school[0][7]);
 	        var logo = localStorage.getItem('school-logo');
 
+			var data = system.get_ajax('../assets/harmony/Process.php?get-schoolInfo',"");
+			var principal = JSON.parse(data.responseText);
+			principal = JSON.parse(principal[0][7]);
+			console.log(principal);
+			principal = (typeof principal[3] == "undefined")?"______________________________":principal[3];
+			var teacher = localStorage.getItem('teacherName');
+
+			console.log(principal);
 			$("a[data-cmd='print']").click(function(){
 				var form = $(this).data('node');
+
 				var content = "", subContent = "", gradeContent = "", subgradeContent = "", _subgradeContent = "", headers = "", footer = "", grades = 0, _grades = 0, genAve = 0;
 				system.loader(true); system.block(true);
+
+				var sign = "<table style='margin-top:100px;'><tr>"+
+							"<tr><td class='center-align'>"+principal+" <br/>Principal</td><td></td><td class='center-align'>"+teacher+" <br/>Subject Teacher</td></tr>"+
+							"</tr></table>";
 
 				$("#_quarter").html(form.toUpperCase());
 				if(form == "Summary"){
@@ -2024,6 +2169,7 @@ var grading = function(){
 					content = $("#"+form.replace(' ','')+" table").html();
 					$("#display_data").html("<table class='display striped bordered'>"+content+"</table>");
 				}
+				$("#display_data").append(sign);
 				console.log(content);
 				Materialize.toast('Collecting Information. Please wait.',5000,'',function(){
 					system.loader(false); system.block(false);
@@ -2176,8 +2322,9 @@ var grading = function(){
 		},
 		get_student:function(controls){
 			var data = system.get_ajax('../assets/harmony/Process.php?get-studentsGradeSheet',controls);
+				console.log(data.responseText);
 			data.success(function(data){
-				// console.log(data);
+				console.log(data);
 		        localStorage.setItem('students_gradingSheet',data);
 			});
 		},
@@ -2199,12 +2346,16 @@ var grading = function(){
 				$("#modeOption").removeClass("hidden");
 	            $("select[data-cmd='changeView']").on('change',function(e){
 	            	if(e.target.selectedOptions[0].value == "Graphical"){
-	            		$("#display_simpleStudentList").addClass("hidden");
-	            		$("#display_graphicalStudentList").removeClass("hidden");
+	            		// $("#display_simpleStudentList").addClass("hidden");
+	            		// $("#display_graphicalStudentList").removeClass("hidden");
+	            		$("#display_simpleStudentList").attr({"style":"opacity:0;"});
+	            		$("#display_graphicalStudentList").attr({"style":"opacity:1; "});
 	            	}
 	            	else{
-	            		$("#display_simpleStudentList").removeClass("hidden");
-	            		$("#display_graphicalStudentList").addClass("hidden");
+	            		$("#display_simpleStudentList").attr({"style":"opacity:1;"});
+	            		$("#display_graphicalStudentList").attr({"style":"opacity:0; height:0px; overflow:hidden;"});
+	            		// $("#display_simpleStudentList").removeClass("hidden");
+	            		// $("#display_graphicalStudentList").addClass("hidden");
 	            	}
 	            });
 			});
@@ -2365,8 +2516,8 @@ var grading = function(){
 				},
 		    });
 		    var printControls = "<div class='row'>"+
-								"	<form id='form_printGrade' class='formValidate col s12' method='get' action='' novalidate='novalidate'>"+
-								"		<div class='input-field col s5'>"+
+								"	<form id='form_printGrade' class='formValidate' method='get' action='' novalidate='novalidate'>"+
+								"		<div class='input-field col s6'>"+
 								"			<label for='field_print' class='active'>Print: </label>"+
 								"			<select class='select-dropdown' id='field_print' name='field_print' data-error='.error_print'>"+
 								"				<option disabled='' selected>Choose</option>"+
@@ -2378,12 +2529,20 @@ var grading = function(){
 								"			</select>"+
 								"			<br/><div class='error_print'></div>"+
 								"		</div>"+
-								"		<div class='input-field col s3'>"+
+								"		<div class='input-field col s4'>"+
 								"			<a data-cmd='print' class='btn blue waves-effect waves-light right' type='submit' name='printGrades'>Print</a>"+
 								"		</div>"+
 								"	</div>"+
 								"</form>";
-            $("#display_simpleStudentList .dataTables_wrapper").prepend("<div class='col s6'>"+printControls+"</div>");
+
+			var modeControls = "<div class='col s3' id='modeOption'>"+
+								"	<label for='field_print' class='active'>Mode: </label>"+
+								"	<select class='select-dropdown' data-cmd='changeView'>"+
+								"		<option selected>Simple</option>"+
+								"		<option>Graphical</option>"+
+								"	</select>"+
+								"</div>";
+            $("#display_simpleStudentList .dataTables_wrapper").prepend("<div class='col s5'>"+printControls+"</div>"+modeControls);
 
             $("select").material_select();
             localStorage.setItem('_finalGrade_student',JSON.stringify(_finalGrade_student));
@@ -2550,7 +2709,16 @@ var grading = function(){
 				bAutoWidth:true
 		    });
 
-		    $('#display_graphicalStudentList').addClass('hidden');
+			var modeControls = "<div class='col s3 hidden' id='modeOption'>"+
+								"	<label for='field_print' class='active'>Mode: </label>"+
+								"	<select class='select-dropdown' data-cmd='changeView' style='display:none;'>"+
+								"		<option>Simple</option>"+
+								"		<option selected>Graphical</option>"+
+								"	</select>"+
+								"</div>";
+            $("#display_graphicalStudentList .dataTables_wrapper").prepend(""+modeControls);
+            $("select").material_select();
+		    // $('#display_graphicalStudentList').addClass('hidden');
 		},
 		_grade_printing:function(){
 	        var data_students = JSON.parse(localStorage.getItem('students_gradingSheet'));
@@ -3395,6 +3563,7 @@ var settings = function(){
 				else
 					banner = system.get_apr(metaData[1]);
 
+				var principal = (metaData.length <= 3)?"No data":metaData[3];
 				content =   "<ul class='collection z-depth-1'>"+
 							"	<li class='collection-item'><strong>Banner:</strong>"+
 							"		<div class='row'>"+
@@ -3515,6 +3684,20 @@ var settings = function(){
 							"				<label for='field_yearEnd'>School Year(End): </label>"+
 							"				<input id='field_yearEnd' type='text' name='field_yearEnd' data-error='.error_yearEnd'>"+
 							"				<div class='error_yearEnd'></div>"+
+							"		    </div>"+
+							"		    <div class='input-field col s6'>"+
+							"		        <button class='btn waves-effect waves-light blue save-profile'>Save</button>"+
+							"		        <action class='btn waves-effect waves-light grey cancel'>Cancel</action>"+
+							"		    </div>"+
+							"		</form>"+
+							"	</li>"+
+							"	<li class='collection-item' id='school_principal'>"+
+							"		<span><strong>Principal:</strong> <display id='_school_principal'>"+principal+"</display><a data-field='school_principal' class='right  mdi-editor-mode-edit tooltipped' data-tooltip='Update' data-position='left'></a></span>"+
+							"		<form role='form' class='form-inline row hidden'>"+
+							"		    <div class='input-field col s6'>"+
+							"				<label for='field_school_principal'>Principal: </label>"+
+							"				<input id='field_school_principal' type='text' name='field_school_principal' data-error='.error_school_principal'>"+
+							"				<div class='error_school_principal'></div>"+
 							"		    </div>"+
 							"		    <div class='input-field col s6'>"+
 							"		        <button class='btn waves-effect waves-light blue save-profile'>Save</button>"+
@@ -3816,6 +3999,21 @@ var settings = function(){
         		$('#school_yearEnd span').addClass('hidden');
         	});
 
+        	$("a[data-field='school_principal']").click(function(){
+				$("input[name='field_yearEnd']").datepicker( {
+				    format: "mm-yyyy",
+				    startView: "months", 
+				    minViewMode: "months",
+				});
+
+        		$('span').removeClass('hidden');
+        		$('form').addClass('hidden');
+
+        		$('input').val('');
+        		$('#school_principal form').removeClass('hidden');
+        		$('#school_principal span').addClass('hidden');
+        	});
+
         	$(".cancel").click(function(){
         		$('span').removeClass('hidden');
         		$('form').addClass('hidden');
@@ -4010,6 +4208,33 @@ var settings = function(){
 					});
 			    }
 			}); 
+
+			$("#school_principal form").validate({
+			    rules: {
+			        field_school_principal: {required: true,minlength: 5,maxlength: 50},
+			    },
+			    errorElement : 'div',
+			    errorPlacement: function(error, element) {
+					var placement = $(element).data('error');
+					if(placement){$(placement).append(error)} 
+					else{error.insertAfter(element);}
+				},
+				submitHandler: function (form) {
+					var form = $(form).serializeArray();
+					var data = system.get_ajax('../assets/harmony/Process.php?set-schoolDetails',[form]);
+					data.success(function(data){
+						console.log(data);
+						if(data == 1){
+							Materialize.toast('Save.',4000);
+							App.handleLoadPage(window.location.hash);
+						}
+						else{
+							console.log(data);
+							Materialize.toast('Cannot process request.',4000);
+						}
+					});
+			    }
+			});
         },
         db_list:function(){
 			var data = system.get_ajax('../assets/harmony/Process.php?get-dbFiles',"");
@@ -4038,8 +4263,34 @@ var settings = function(){
 				$("#display_dbFiles").html(content);
 			});
         },
+        db_lastlist:function(){
+			var data = system.get_ajax('../assets/harmony/Process.php?get-dbFiles',"");
+			data.success(function(data){
+				var content = "", _data = "", date = "";
+				data = JSON.parse(data);
+				console.log(data);
+				$.each(data,function(i,v){
+					if(v[0] != 'k12.sql'){
+						date = new Date(v[1]);
+						content =  "<li class='collection-item'>"+
+									"	<div class='row'>"+
+									"		<div class='col s9 truncate'><strong>Last database backup:</strong></div>"+
+									"		<div class='col s9 truncate'>"+
+												v[0]+"<br/>"+v[1]+
+									"		</div>"+
+									// "		<div class='secondary-content'>"+
+									// "			<button class='mdi-action-restore btn-flat waves-effect waves-light'></button>"+
+									// "		</div>"+
+									"	</div>"+
+									"</li>";						
+					}
+				});
+				content = "<ul class='collection with-header'>"+content+"</ul>";
+
+				$("#display_dbFiles").html(content);
+			});
+        },
         db_restore:function(){
-        	this.db_list();
 			$("button[data-cmd='restore-db']").click(function(){
 				$(this).addClass('hidden');
 				$('#restore_confirmHandler').removeClass('hidden');
@@ -4050,46 +4301,37 @@ var settings = function(){
 			});
 
 			$("button[data-cmd='sure-restore-db']").click(function(){
-				system.loader(true); system.block(true);
-				Materialize.toast('Starting database restoration.',2000,'',function(){
-					var data = system.get_ajax('../assets/harmony/Process.php?drop-database',"");
-					data.success(function(data){
-						Materialize.toast('Restoring database...',2000,'',function(){
-							Materialize.toast('Creating database. Do not interupt.',2000,'',function(){
-								var data = system.get_ajax('../assets/harmony/Process.php?createDB',"");
-								data.success(function(data){
-									if(data == 1){
-										Materialize.toast('Database created.',5000,'',function(){
-											Materialize.toast('Adding tables.',5000,'',function(){
-												var data = system.get_ajax('../assets/harmony/Process.php?createTables',"");
-												data.success(function(data){
-													if(data != 0){
-														Materialize.toast('Restored. You will be logged out.',4000,'',function(){
-															window.location.href = '../';
-														});
-													}
-													else{
-														Materialize.toast('Cannot process database restoration',4000,'',function(){
-															window.location.href = '../k12/account/';
-														});
-													}
-												});									
-											});
-										});
-									}
-									else{
-										Materialize.toast('Cannot process database restoration.',4000,'',function(){
-											window.location.href = '../k12/account/';
-										});
-									}
-								});					
-							});
+				var data = _process.passwordAuth(function(){
+					Materialize.toast('Authentication success.',4000);
+					console.log("success");
+					system.loader(true); system.block(true);
+					Materialize.toast('Starting to remove all grades data.',2000,'',function(){
+						var data = system.get_ajax('../assets/harmony/Process.php?truncate-grades',"");
+						data.success(function(data){
+							if(data != 0){
+								Materialize.toast('Restored. The system will restart.',4000,'',function(){
+									window.location.href = '../';
+								});
+							}
+							else{
+								Materialize.toast('Cannot process grade restoration',4000,'',function(){
+									window.location.href = '../k12/account/';
+								});
+							}
+
 						});
+
 					});
+				},
+				function(){
+					Materialize.toast('Authentication failed.',4000);
+					$("#field_passwordAuth").val("");
+					console.log("failed");
 				});
 			});
         },
         db_backup:function(){
+        	this.db_lastlist();
 			var data = localStorage.getItem('schoolInformation');
 			data = JSON.parse(data);
             var months = ["January", "February", "March", "April", "May", "June",  "July", "August", "September", "October", "November", "December"];
@@ -4116,28 +4358,39 @@ var settings = function(){
 			});
 
 			$("button[data-cmd='sure-backup-db']").click(function(){
-				system.loader(true); system.block(true);
-				Materialize.toast('Starting database backup.',2000,'',function(){
-					Materialize.toast('Back up on process. Do not interupt',2000,'',function(){
-						var data = system.get_ajax('../assets/harmony/Process.php?buckup-db',"");
-						data.success(function(data){
-							// console.log(data);
-							data = JSON.parse(data);
-							if(data[0] == 1){
-								Materialize.toast('Success. Database has been backed up.',1000,'',function(){
-									system.loader(false); system.block(false);
-									$("button[data-cmd='backup-db']").removeClass('hidden');
-									$('#backup_confirmHandler').addClass('hidden');
-									window.location.href = "../assets/db/"+data[1];
-								});
-							}
-							else{
-								Materialize.toast('Fa iled. Cannot back up this time. Please try later.',1000,'',function(){
-									system.loader(false); system.block(false);
-								});
-							}
+				var data = _process.passwordAuth(function(){
+					Materialize.toast('Authentication success.',4000);
+					console.log("success");
+					system.loader(true); system.block(true);
+					Materialize.toast('Starting database backup.',2000,'',function(){
+						Materialize.toast('Back up on process. Do not interupt',2000,'',function(){
+							var data = system.get_ajax('../assets/harmony/Process.php?buckup-db',"");
+							data.success(function(data){
+								data = JSON.parse(data);
+								if(data[0] == 1){
+									settings.db_lastlist();
+									Materialize.toast('Success. Database has been backed up.',1000,'',function(){
+										system.loader(false); system.block(false);
+										$("button[data-cmd='backup-db']").removeClass('hidden');
+										$('#backup_confirmHandler').addClass('hidden');
+										$(".bottom-sheet").closeModal();
+										window.location.href = "../assets/db/"+data[1];
+									});
+								}
+								else{
+									Materialize.toast('Failed. Cannot back up this time. Please try later.',1000,'',function(){
+										system.loader(false); system.block(false);
+									});
+								}
+							});
 						});
 					});
+
+				},
+				function(){
+					Materialize.toast('Authentication failed.',4000);
+					$("#field_passwordAuth").val("");
+					console.log("failed");
 				});
 			});
         },
@@ -4201,6 +4454,7 @@ var settings = function(){
 												else{
 													Materialize.toast('Cannot process database restoration.',4000,'',function(){
 														window.location.href = '../k12/account/';
+														system.loader(false); system.block(false);
 													});
 												}
 											});					
@@ -4213,7 +4467,7 @@ var settings = function(){
                     else{
                     	$("#displayImport").addClass('hidden');
 						$("#display_excelFile").html("");
-						Materialize.toast("MS Excel file is not valid. Try a CSV file.",4000);
+						Materialize.toast("SQL file is not valid.",4000);
                     }
                 });
             }
