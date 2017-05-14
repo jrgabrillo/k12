@@ -281,6 +281,7 @@ var system = function(){
 					"</div>";
 		},
 		nav_scrollHandler:function(bg){
+			$("body").append("<script>console.log('%cDeveloped By: Rufo N. Gabrillo Jr. (2016)', 'background:#000;color:#ccc;')</script>");
 			$("nav .nav-wrapper").attr({'style':'background: url('+bg+') no-repeat; background-size: cover; background-position-y:50%;'});
 			var nav = function(){
 				"use strict";
