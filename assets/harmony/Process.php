@@ -185,15 +185,10 @@ $function = new DatabaseClasses;
 		$dateStart = date("Y-m-d",strtotime("01-".$shlYear[0][0]));
 		$dateEnd = date("Y-m-d",strtotime("01-".$shlYear[0][1]));
 
-        $query = $function->PDO_SQL("SELECT * FROM tbl_student WHERE (`date` BETWEEN '{$dateStart}' AND '{$dateEnd}') AND (status = 0 AND year = '{$year}' AND section = '{$section}')");
+        $query = $function->PDO_SQL("SELECT * FROM tbl_student LEFT JOIN tbl_studentinfo ON tbl_student.student_id = tbl_studentinfo.student_id WHERE (tbl_student.date BETWEEN '{$dateStart}' AND '{$dateEnd}') AND (tbl_student.status = 0 AND tbl_student.year = '{$year}' AND tbl_student.section = '{$section}')");
 
         if(count($query)>0){
-        	foreach ($query as $i => $v) {
-        		$s_id = $v[1];
-		        $q1 = $function->PDO_ASSOC("SELECT * FROM tbl_studentinfo WHERE student_id = '{$s_id}'");
-		        $final[] = [$v,$q1[0]];
-        	}
-	        print_r(json_encode($final));
+	        print_r(json_encode($query));
         }
         else
             echo 0;
@@ -821,26 +816,36 @@ $function = new DatabaseClasses;
 		$data = $_POST['data'];
         $id = $function->PDO_IDGenerator('tbl_studentinfo','id');
 		$date = $function->PDO_DateAndTime();
-		$error = [];
+		$error = []; $count = 0;
+		$q1 = ""; $q2 = "";
+
         foreach ($data as $key => $value) {
 			$query = $function->PDO_ASSOC("SELECT DISTINCT(tbl_studentinfo.student_id) FROM tbl_studentinfo INNER JOIN tbl_student ON tbl_studentinfo.student_id = tbl_student.student_id WHERE tbl_studentinfo.student_id = '$value[0]'");
 			if(count($query)<=0){
 				$value[4] = date("m/j/Y",strtotime($value[4]));
-		        $id = $function->PDO_IDGenerator('tbl_studentinfo','id');
-				$query = $function->PDO(false,"INSERT INTO  tbl_studentinfo(id,family_name,given_name,middle_name,gender,date_of_birth,place_of_birth,permanent_address,height,weight,	mother_name,father_name,citizenship,student_id,picture,`date`) VALUES ('{$id}','{$value[1]}','{$value[2]}','{$value[3]}','{$value[5]}','{$value[4]}','{$value[13]}','{$value[14]}','{$value[9]}','{$value[10]}','{$value[11]}','{$value[12]}','{$value[8]}','{$value[0]}','avatar.jpg','{$date}'); INSERT INTO  tbl_student(id,student_id,year,section,`date`) VALUES ('{$id}','{$value[0]}','{$value[6]}','{$value[7]}','{$date}')");
-				if(!$query->execute()){
-					$Data = $query->errorInfo();
-					$error[] = $Data;
-				}
+		        $id = sha1($function->PDO_TableCounter('tbl_studentinfo')+($count++)); 
+		        if((count($data)-1) <= $key){
+					$q1 .= "('{$id}','{$value[1]}','{$value[2]}','{$value[3]}','{$value[5]}','{$value[4]}','{$value[13]}','{$value[14]}','{$value[9]}','{$value[10]}','{$value[11]}','{$value[12]}','{$value[8]}','{$value[0]}','avatar.jpg','{$date}')";
+
+					$q2 .= "('{$id}','{$value[0]}','{$value[6]}','{$value[7]}','{$date}','1')";
+		        }
+		        else{
+					$q1 .= "('{$id}','{$value[1]}','{$value[2]}','{$value[3]}','{$value[5]}','{$value[4]}','{$value[13]}','{$value[14]}','{$value[9]}','{$value[10]}','{$value[11]}','{$value[12]}','{$value[8]}','{$value[0]}','avatar.jpg','{$date}'),";
+
+					$q2 .= "('{$id}','{$value[0]}','{$value[6]}','{$value[7]}','{$date}','1'),";
+
+		        }
 			}
         }
 
-        if(count($error)>0){
-        	print_r($error);
-        }
-        else{
-        	echo 1;
-        }
+		$query = $function->PDO(false,"INSERT INTO  tbl_studentinfo(id,family_name,given_name,middle_name,gender,date_of_birth,place_of_birth,permanent_address,height,weight,	mother_name,father_name,citizenship,student_id,picture,`date`) VALUES".$q1.";"."INSERT INTO  tbl_student(id,student_id,year,section,`date`,status) VALUES".$q2);
+		if($query->execute()){
+			echo 1;
+		}
+		else{
+			$Data = $query->errorInfo();
+			print_r($Data);
+		}
 	}
 
 	//deleters
