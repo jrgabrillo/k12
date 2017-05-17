@@ -1,0 +1,106 @@
+<style type="text/css">
+	.btn-icon:hover{
+		border:1px solid #000;
+		border-radius: 2px;
+		opacity: 0.8;
+	}
+	.btn-icon{
+		margin-left:10px;
+		border:1px solid rgba(0,0,0,0);
+	}
+
+	td, th {
+	    padding: 5px 5px !important;
+	}
+
+</style>
+<link media="print" href="../assets/css/style.min.css" type="text/css" rel="stylesheet" >
+<link media="print" href="../assets/css/materialize.min.css" type="text/css" rel="stylesheet">
+<link media="print" href="../assets/css/plugins/dataTables/dataTables.tableTools.min.css" type="text/css" rel="stylesheet">
+<div class="wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m12 l12">
+				<h5 class="breadcrumbs-title">Grade sheet</h5>
+				<ol class="breadcrumbs">
+					<li><a href="../account/">Dashboard</a></li>
+					<li><a href="#cmd=index;content=options_gradeSheet">Options - Grade sheet</a></li>
+					<li class="active">Grade sheet</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div class="divider"></div>
+    <div class="container">
+        <div class="section">
+		    <div class="row hidden">
+            	<div id='print_gradeArea'>
+					<div class='col offset-s2 col s8'>
+						<div class='' style='margin-bottom:20px;'>
+							<h5 class='center-align'>Class Record<br/><h6 class='center-align'><i>(Pursuant to Deped Order 8 series of 2015)</i></h6></h5>
+							<table class='table-no-bordered' style='border:0px !important; margin-bottom:50px;'>
+								<tr>
+									<td width='20%' class='center-align' rowspan="2"><img id='_schoolLogo' src="../assets/img/logo.png" class='circle' alt='logo' style='width: 100px;'></td>
+							  		<td width='30%'>
+							  			REGION:  <span id='_schoolRegion'></span>
+									</td>
+							  		<td width='30%'>
+							  			DIVISION:  <span id='_schoolDivision'></span>
+									</td>
+									<td width='20%' class='center-align' rowspan="2"><img src='../assets/img/logo.png' class='img-circle circle-border m-b-md' alt='logo' style='width: 100px;'></td>
+								</tr>
+								<tr>
+							  		<td>
+							  			SCHOOL NAME:  <span id='_schoolName'></span>
+									</td>
+							  		<td>
+							  			SCHOOL ID:  <span id='_schoolSchoolID'></span><br/>
+							  			SCHOOL YEAR:  <span id='_schoolSchoolYear'></span>
+									</td>
+								</tr>
+								<tr>
+							  		<td>
+							  			QUARTER:  <span id='_quarter'></span>
+									</td>
+							  		<td>
+							  			GRADE AND SECTION:  <span id='_gradeSection'></span>
+									</td>
+							  		<td>
+							  			TEACHER:  <span id='_teacher'></span>
+									</td>
+							  		<td>
+							  			SUBJECT:  <span id='_subject'></span>
+									</td>
+								</tr>
+							</table>
+							<div id='display_data'></div>
+						</div>
+					</div>
+            	</div>
+		    </div>
+		    <div class="row">
+		        <div class="col s12" id='display_studentList'></div>
+		    </div>
+        </div>
+    </div>
+</div>
+<div id='modal_bottomPopup' class='modal bottom-sheet' style='min-height:100% !important;'>
+    <div class='modal-content'>
+        <h5>System</h5>
+        <div class='modal_subContent'></div>
+    </div>
+</div>
+<!-- <script src="../assets/js/plugins/print/print.js"></script> -->
+<script src="../assets/js/jQuery.print.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.tooltipped').tooltip({delay: 50});
+	});
+    account.display_schoolInfo('../assets/harmony/Process.php?get-schoolInfo',true);
+	grading.list_gradingSheet();
+	$("#_teacher").html($("a.profile-btn").html().toUpperCase());
+
+	$('.wrapper').click(function(){
+		$(".material-tooltip").hide(100);
+	});
+</script>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>K12</title>
+
+    <link rel="icon" href="" sizes="32x32">
+    <link rel="apple-touch-icon-precomposed" href="http://demo.geekslabs.com/materialize/v3.1/images/favicon/apple-touch-icon-152x152.png">
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">  
+    <link media="screen" href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link media="screen" href="assets/css/style.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link media="screen" href="assets/css/custom.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link media="screen" href="assets/css/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link media="screen" href="assets/css/icons.css" type="text/css" rel="stylesheet">
+    <link media="screen" href="assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+  </head>
+
+<body class='cyan'>
+    <div id='block-control' class=''></div>
+    <div class="progress hide-on-med-and-up hide-on-med-and-down" style="margin: 0rem 0 1rem 0;">
+        <div class="indeterminate"></div>
+    </div>
+    <div id="loader-wrapper">
+        <div id="loader"></div>        
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <div id="">
+        <div class="wrapper">
+            <div class="container">
+                <div class="section hidden" id="display_schoolDetails">
+                    <div class="row">
+                        <div class="col s12 offset-m3 offset-l3 m6 l6 animated wobble">
+                            <div id="profile-card" class='show-data card'>
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="" id='_schoolBanner' src="assets/img/bg-banner.jpg" alt="user bg" style="height:100%;">
+                                </div>
+                                <div class="card-content">
+                                    <img src="" id='_schoolLogo' alt="" class="circle logo responsive-img card-profile-image">
+                                    <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right tooltipped" data-position="left" data-tooltip="Log In">
+                                        <i class="mdi-communication-vpn-key"></i>
+                                    </a>
+                                    <span class="card-title activator grey-text text-darken-4" id='_schoolName'>K12 Grading System</span>
+                                    <div class="divider"></div>
+                                    <p><strong>School Address: </strong><span id='_schoolAddress'>-</span></p>
+                                    <div class="divider"></div>
+                                    <p><strong>School ID: </strong><span id='_schoolSchoolID'>-</span></p>
+                                    <div class="divider"></div>
+                                    <p><strong>School Year: </strong><span id='_schoolSchoolYear'>-</span></p>
+                                    <div class="divider"></div>
+                                    <p><strong>Region: </strong><span id='_schoolRegion'>-</span></p>
+                                    <div class="divider"></div>
+                                    <p><strong>Division: </strong><span id='_schoolDivision'>-</span></p>
+                                </div>
+                                <div class="card-reveal" style="display: none; transform: translateY(0px);">
+                                    <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i></span>
+                                    <p>
+                                        <div class="col s8 offset-s2">
+                                            <form class="login-form center-align">
+                                                <div class="row">
+                                                    <div class="input-field col s12 center">
+                                                        <img src="assets/img/logo.png" alt="" class="circle responsive-img valign logo profile-image-login">
+                                                        <p class="center login-form-text">K12 System</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row margin">
+                                                    <div class="row margin">
+                                                        <div class="input-field col s12">
+                                                            <i class="mdi-social-person-outline prefix"></i>
+                                                                <input id='field_loginUsername' type="text" name="field_loginUsername" data-error=".error_loginUsername">
+                                                                <label for="field_loginUsername">Username</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-field col s12">
+                                                            <i class="mdi-action-lock-outline prefix"></i>
+                                                                <input id='field_loginPassword' type="password" name="field_loginPassword" data-error=".error_loginPassword">
+                                                                <label for="field_loginPassword">Password</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row margin">
+                                                            <div class="input-field col s12">
+                                                            <button href="#" class="btn waves-effect waves-light blue" data-cmd='login'>Login</button>
+                                                        </div>
+                                                        <div class="row">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section" id="display_connectionError">
+                    <div class="row">
+                        <div class="col m3 l3 card animated wobble"></div>
+                        <div class="col s12 m6 l6 animated wobble">
+                            <div class="card">
+                                <div class="card-content">
+                                    <span class="card-title">Connection Error!</span>
+                                    <p>The system is not connected to the database.</p>
+                                </div>
+                                <div class="card-action">
+                                    <a href="#" class="grey-text" data-cmd='dbConnect'>Connect</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hiddendiv common"></div>
+    <div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+    <div class="drag-target" style="right: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+    <script type="text/javascript" src="assets/js/jquery-2.1.1.js"></script>    
+    <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+    <script type="text/javascript" src="assets/js/prism.js"></script>
+    <script type="text/javascript" src="assets/js/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="assets/js/masonry.pkgd.min.js"></script>
+    <script type="text/javascript" src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/validation/additional-methods.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/toastr/toastr.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/process.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            ini.ini();
+            account.display_schoolInfo('assets/harmony/Process.php?get-schoolInfo',false);
+        });
+
+        $(window).load(function() {
+            window.loaded = true;
+        });
+
+        // if(window.loaded){
+        //     var $containerProducts = $("#products");
+        //         $containerProducts.imagesLoaded(function() {
+        //             $containerProducts.masonry({
+        //                 itemSelector: ".product",
+        //                 columnWidth: ".product-sizer",
+        //             });
+        //         });
+
+        //     $(document).ready(function(){
+        //         $('.tooltipped').tooltip();
+        //     });                
+        // }
+    </script>
+</body>
+</html>

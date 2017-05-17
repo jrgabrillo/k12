@@ -1,0 +1,103 @@
+<div class="wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m12 l12">
+				<h5 class="breadcrumbs-title">Back Up</h5>
+				<ol class="breadcrumbs">
+					<li><a href="../account/">Dashboard</a></li>
+					<li class="active">Back Up</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div class="divider"></div>
+    <div class="container">
+        <div class="section">
+			<div class="row">
+		        <div class="col s6">
+					<ul class="collection with-header">
+	                    <li class="collection-header blue">
+	                        <h5 class="task-card-title white-text">Send to archive</h5>
+	                    </li>
+	                    <li class="collection-item" style='min-height: 200px;'>
+			        		<p>
+			        			Archive database content. This is to ensure that all the information you have uploaded here are kept safe by you. <br/>
+			        			<i>Images and other files are excluded in this archiving.</i><br/>
+			        			<div id="display_dbFiles"></div>
+			        		</p>
+	                    </li>
+	                    <li class="collection-item">
+			        		<button class='btn blue waves-effect waves-light' data-cmd='backup-db' data-activate='true'>Proceed</button>
+			        		<span class='hidden' id='backup_confirmHandler'>
+			        			<span class='btn-flat white disabled'>Are you sure?</span>
+			        			<span class='right'>
+				        			<button class='btn blue waves-effect waves-light' data-cmd='sure-backup-db'>Yes</button> 
+				        			<button class='btn btn-flat waves-effect waves-light' data-cmd='cancel-backup-db'>Cancel</button>
+			        			</span>
+			        		</span>
+	                    </li>
+	                </ul>
+		        </div>
+		        <div class="col s6">
+					<ul class="collection with-header">
+	                    <li class="collection-header grey">
+	                        <h5 class="task-card-title white-text">Restore</h5>
+	                    </li>
+	                    <li class="collection-item" style='min-height: 200px;'>
+			        		<p>
+			        			<strong>Restore database to default content.</strong><br/>
+			        			It will delete all the current content and replace with the new and fresh data.<br/>
+			        			Even account details will be restored. You will be logged out but you can use the default username and password to log in.<br/>
+			        			<u>Warning! You cannot undo after restoration. Suspending the process might break the system.</u><br/>
+			        		</p>
+			        		<button class='btn btn-flat waves-effect waves-light white' data-cmd='restore-db'>Clear Records</button>
+			        		<span class='hidden' id='restore_confirmHandler'>
+			        			<span class='btn-flat white disabled'>Clear Records?</span>
+			        			<span class='right'>
+				        			<button class='btn blue waves-effect waves-light' data-cmd='sure-restore-db'>Proceed</button> 
+				        			<button class='btn waves-effect waves-light red' data-cmd='cancel-restore-db'>Cancel</button>
+			        			</span>
+			        		</span>
+	                    </li>
+	                    <li class="collection-item">
+			        		<div>
+					            <div class="row">
+					                <div class="input-field col s6">
+					                    <label class='active'>Select excel file: <span id="display_excelFile"></span></label>
+					                    <label for="field_file" class='btn waves-effect waves-light grey' style='color: #fff;cursor:pointer;'>View Archives</label>
+					                    <input id='field_file' class="btn btn-sm blue waves-effect waves-light hidden" accept="file/*"type="file" name="field_file" data-error=".error_excelFile">
+					                    <br/>
+					                    <br/>
+					                    <div class="error_excelFile"></div>
+					                </div>
+					            </div>
+
+					            <div class="row">
+					                <div class='col s12 hidden' id="displayImport" style="margin-top:20px; position: relative;">
+					                	<p>File is valid.</p>
+			                            <input id='save_import' class="btn btn-sm blue waves-effect waves-light" type="button" value="Save">
+					                </div>
+					            </div>
+			        		</div>
+	                    </li>
+	                </ul>
+		        </div>
+			</div>
+        </div>
+    </div>
+</div>
+<div id='modal_bottomPopup' class='modal bottom-sheet'>
+    <div class='modal-content'>
+        <h5>System</h5>
+        <div class='modal_subContent'></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	settings.db_restore();
+	settings.db_backup();
+	settings.importFromFile_sql();
+    $(document).ready(function(){
+        $('.tooltipped').tooltip();
+    });   
+</script>
